@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Chat-Client</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="your_username">Your username</string>
+    <string name="your_password">Your password</string>
+    <string name="sign_in_to_begin_your_conversation">Sign in to begin your conversation</string>
+    <string name="sign_in">Sign in</string>
+    <string name="or">or</string>
+    <string name="sign_up">Sign up</string>
+    <string name="retype_password">Retype password</string>
+    <string name="sign_up_to_connect_to_the_world">Sign up to connect to the world</string>
+    <string name="welcome">Welcome,</string>
+    <string name="already_have_account">Already have account?</string>
+</resources>

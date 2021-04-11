@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Basic colors -->
+    <color name="colorIcon">#545450</color>
+    <color name="colorGray">#BAB6B6</color>
+    <color name="colorLightGray">#f3f3f3</color>
+    <color name="colorLightGray40">#66F3F3F3</color>
+    <color name="colorLightBlack">#2C2C2C</color>
+
+    <!-- Main colors -->
+    <color name="colorMain1">#3090ff</color>
+    <color name="colorMain2">#2D7FE3</color>
+    <color name="colorMain3">#042259</color>
+    <color name="colorMainContrast1">#FD992C</color>
+    <color name="colorMainContrast2">#FF8500</color>
+
+    <!-- Purple colors -->
+    <color name="colorLightPurple">#EEECF4</color>
+    <color name="colorPurple1">#887edc</color>
+    <color name="colorPurple2">#4c4298</color>
+    <color name="colorPurple3">#4b4198</color>
+    <color name="colorPurple4">#201a50</color>
+
+    <!-- Blue colors -->
+    <color name="colorBlue0">#A2E2FF</color>
+    <color name="colorBlue1">#48BAED</color>
+    <color name="colorBlue2">#3675DF</color>
+    <color name="colorBlue3">#053F9F</color>
+
+    <!-- Green colors -->
+    <color name="colorGreen1">#64DC00</color>
+
+    <!-- Warm colors -->
+    <color name="colorYellow1">#FFEA00</color>
+    <color name="colorOrange1">#FF9100</color>
+    <color name="colorRed1">#FF3D00</color>
+    <color name="colorRed2">#BC2D00</color>
+    <color name="colorRed3">#FF0000</color>
+
+</resources>

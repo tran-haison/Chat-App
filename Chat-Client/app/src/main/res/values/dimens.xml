@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General -->
+    <dimen name="elevation">5dp</dimen>
+    <dimen name="margin_vertical">10dp</dimen>
+    <dimen name="margin_horizontal">15dp</dimen>
+    <dimen name="padding_horizontal">10dp</dimen>
+    <dimen name="padding_vertical">5dp</dimen>
+
+    <!-- Card view attributes -->
+    <dimen name="card_margin_horizontal">15dp</dimen>
+    <dimen name="card_radius">15dp</dimen>
+    <dimen name="card_elevation">3dp</dimen>
+
+    <!-- Text size -->
+    <dimen name="text_intro">40sp</dimen>
+    <dimen name="text_tool_bar">22sp</dimen>
+    <dimen name="text_heading">18sp</dimen>
+    <dimen name="text_title">16sp</dimen>
+    <dimen name="text_default">14sp</dimen>
+    <dimen name="text_detail">12sp</dimen>
+
+    <!-- Button attributes -->
+    <dimen name="button_margin_horizontal">10dp</dimen>
+    <dimen name="button_height">55dp</dimen>
+    <dimen name="button_text_size">16sp</dimen>
+</resources>

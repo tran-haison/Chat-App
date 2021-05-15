@@ -1,8 +1,10 @@
-package com.example.chat_client;
+package com.example.chat_client.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.chat_client.R;
 
 public class MainActivity extends AppCompatActivity {
 

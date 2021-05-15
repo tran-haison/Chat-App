@@ -7,14 +7,14 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/margin_horizontal"
-    tools:context=".ui.signup.SignUpActivity">
+    tools:context=".ui.user.UserSignUpActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/bungee"
+        android:includeFontPadding="false"
         android:text="@string/welcome"
-        android:textColor="@color/colorPurple2"
         android:textSize="@dimen/text_intro" />
 
     <TextView
@@ -29,7 +29,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/username">
+        android:hint="@string/username"
+        app:endIconMode="clear_text"
+        app:endIconTint="@color/colorIcon"
+        app:startIconDrawable="@drawable/ic_round_user_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -48,7 +51,8 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical"
         android:hint="@string/password"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_round_password_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -66,7 +70,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/retype_password"
-        app:passwordToggleEnabled="true">
+        app:passwordToggleEnabled="true"
+        app:startIconDrawable="@drawable/ic_round_password_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -92,7 +97,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/sign_up"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -119,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_horizontal"
             android:text="@string/sign_in"
-            android:textColor="@color/colorPurple4"
+            android:textColor="@color/colorBlue2"
             android:textSize="@dimen/text_title"
             android:textStyle="bold" />
     </LinearLayout>

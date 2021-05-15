@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Server</string>
+    <string name="server_is_running">Server is running</string>
+</resources>

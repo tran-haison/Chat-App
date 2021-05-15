@@ -1,4 +1,4 @@
-package com.example.chat_client.socket;
+package com.example.server.socket;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -52,10 +52,11 @@ public class ClientHandler implements Runnable {
                 ClientHandler clientHandler = Server.clientsIndexToObject.get(index);
 
                 // if the recipient is found, write on its output stream
+                assert clientHandler != null;
                 if (clientHandler.name.equalsIgnoreCase(recipient) && clientHandler.isLoggedIn) {
                     clientHandler.outputStream.writeUTF(this.name + " : " + msgToSend);
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 try {
                     this.socket.close();
                 } catch (IOException ioException) {

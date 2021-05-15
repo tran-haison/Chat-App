@@ -15,13 +15,6 @@
     <color name="colorLightGray40">#66F3F3F3</color>
     <color name="colorLightBlack">#2C2C2C</color>
 
-    <!-- Main colors -->
-    <color name="colorMain1">#3090ff</color>
-    <color name="colorMain2">#2D7FE3</color>
-    <color name="colorMain3">#042259</color>
-    <color name="colorMainContrast1">#FD992C</color>
-    <color name="colorMainContrast2">#FF8500</color>
-
     <!-- Purple colors -->
     <color name="colorLightPurple">#EEECF4</color>
     <color name="colorPurple1">#887edc</color>
@@ -32,7 +25,7 @@
     <!-- Blue colors -->
     <color name="colorBlue0">#A2E2FF</color>
     <color name="colorBlue1">#48BAED</color>
-    <color name="colorBlue2">#3675DF</color>
+    <color name="colorBlue2">#4583EA</color>
     <color name="colorBlue3">#053F9F</color>
 
     <!-- Green colors -->

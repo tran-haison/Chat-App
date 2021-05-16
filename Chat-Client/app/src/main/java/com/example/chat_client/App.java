@@ -20,7 +20,6 @@ public class App extends Application {
 
         // Start client socket
         Client client = Client.getInstance();
-        client.listen();
         responseMessage = client.responseMessageLiveData();
 
         // Create notification channel

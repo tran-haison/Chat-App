@@ -17,11 +17,11 @@ public class UserViewModel extends ViewModel {
     }
 
     public void signUpUser(User user) {
-        client.send(RequestMessage.signUp(user));
+        client.sendMessage(RequestMessage.signUp(user));
     }
 
     public void signInUser(User user) {
-        client.send(RequestMessage.signIn(user));
+        client.sendMessage(RequestMessage.signIn(user));
     }
 
     public LiveData<String> getResponseMessageLiveData() {

@@ -8,5 +8,5 @@ public class Constants {
 
     public static final String USERNAME_INVALID = "Username is invalid!";
     public static final String PASSWORD_INVALID = "Password is invalid!";
-
+    public static final String UNKNOWN_ERROR = "UNKNOWN ERROR";
 }

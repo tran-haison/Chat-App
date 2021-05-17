@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- General -->
+    <dimen name="iv_size">24dp</dimen>
     <dimen name="elevation">5dp</dimen>
     <dimen name="margin_vertical">10dp</dimen>
     <dimen name="margin_horizontal">15dp</dimen>
@@ -9,7 +10,7 @@
 
     <!-- Card view attributes -->
     <dimen name="card_margin_horizontal">15dp</dimen>
-    <dimen name="card_radius">15dp</dimen>
+    <dimen name="card_radius">20dp</dimen>
     <dimen name="card_elevation">3dp</dimen>
 
     <!-- Text size -->

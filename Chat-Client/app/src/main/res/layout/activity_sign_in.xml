@@ -10,11 +10,12 @@
     tools:context=".ui.user.UserSignInActivity">
 
     <TextView
-        android:includeFontPadding="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bungee"
-        android:text="@string/chat_app"
+        android:fontFamily="@font/quicksand_bold"
+        android:includeFontPadding="false"
+        android:text="@string/app_name"
+        android:textColor="@color/colorLightBlack"
         android:textSize="@dimen/text_intro" />
 
     <TextView
@@ -23,69 +24,89 @@
         android:fontFamily="@font/poppins_light"
         android:text="@string/sign_in_to_begin_your_conversation" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilUsername"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical"
-        android:hint="@string/username"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/colorIcon"
-        app:startIconDrawable="@drawable/ic_round_user_24" >
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_round_user_24"
+            android:drawablePadding="@dimen/padding_horizontal"
+            android:drawableTint="@color/colorGray"
             android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="@string/username"
             android:inputType="textPersonName"
+            android:padding="@dimen/margin_horizontal"
             android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/text_default" />
+            android:textSize="@dimen/text_default"
+            tools:targetApi="m" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_horizontal"
-        android:hint="@string/password"
-        app:startIconDrawable="@drawable/ic_round_password_24"
-        app:passwordToggleEnabled="true">
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_round_password_24"
+            android:drawablePadding="@dimen/padding_horizontal"
+            android:drawableTint="@color/colorGray"
             android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="@string/password"
             android:inputType="textPassword"
+            android:padding="@dimen/margin_horizontal"
             android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/text_default" />
+            android:textSize="@dimen/text_default"
+            tools:targetApi="m" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical"
-        android:background="@drawable/background_positive"
         android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_horizontal">
+        app:cardBackgroundColor="@color/colorBlue2"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/sign_in"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/margin_vertical">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/sign_in"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -95,48 +116,27 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/tvOr"
+            android:layout_toStartOf="@id/tvSignUp"
             android:background="@color/colorLightGray" />
 
         <TextView
-            android:id="@+id/tvOr"
+            android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginHorizontal="@dimen/margin_horizontal"
-            android:includeFontPadding="false"
-            android:text="@string/or" />
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/sign_up"
+            android:textColor="@color/colorBlue2" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@id/tvOr"
+            android:layout_toEndOf="@id/tvSignUp"
             android:background="@color/colorLightGray" />
 
     </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/btnSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/margin_vertical"
-        android:background="@drawable/background_negative"
-        android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/sign_up"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/colorBlue2"
-            android:textSize="@dimen/button_text_size" />
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -38,12 +38,9 @@ public class UserSignInActivity extends AppCompatActivity {
         // Setup ViewModel
         setupViewModel();
 
-        // Get data from UserSignUpActivity
-        getUserFromSignUp();
-
         // Button clicked events
         binding.btnSignIn.setOnClickListener(v -> signIn());
-        binding.btnSignUp.setOnClickListener(v -> startActivity(
+        binding.tvSignUp.setOnClickListener(v -> startActivity(
                 new Intent(UserSignInActivity.this, UserSignUpActivity.class))
         );
     }
@@ -62,37 +59,23 @@ public class UserSignInActivity extends AppCompatActivity {
                     Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
                     goToMainActivity(user);
                     break;
+                default:
+                    Snackbar.make(binding.getRoot(), Constants.UNKNOWN_ERROR, Snackbar.LENGTH_SHORT).show();
+                    break;
             }
         });
     }
 
-    private void getUserFromSignUp() {
-        Intent intent = getIntent();
-        Bundle bundle = intent.getBundleExtra(Constants.BUNDLE);
-
-        if (bundle != null) {
-            user = (User) bundle.getSerializable(Constants.USER);
-            Objects.requireNonNull(binding.tilUsername.getEditText()).setText(user.getUsername());
-            Objects.requireNonNull(binding.tilPassword.getEditText()).setText(user.getPassword());
-        }
-    }
-
     private void signIn() {
-        // Remove error of text input layout
-        binding.tilUsername.setError(null);
-        binding.tilPassword.setError(null);
-
         // Get text from edit text
-        String username = Objects.requireNonNull(binding.tilUsername.getEditText())
-                .getText().toString();
-        String password = Objects.requireNonNull(binding.tilPassword.getEditText())
-                .getText().toString();
+        String username = binding.etUsername.getText().toString();
+        String password = binding.etPassword.getText().toString();
 
         user = new User(username, password);
         if (!user.isUsernameValid()) {
-            binding.tilUsername.setError(Constants.USERNAME_INVALID);
+            Snackbar.make(binding.getRoot(), Constants.USERNAME_INVALID, Snackbar.LENGTH_SHORT).show();
         } else if (!user.isPasswordValid()) {
-            binding.tilPassword.setError(Constants.PASSWORD_INVALID);
+            Snackbar.make(binding.getRoot(), Constants.PASSWORD_INVALID, Snackbar.LENGTH_SHORT).show();
         } else {
             viewModel.signInUser(user);
         }

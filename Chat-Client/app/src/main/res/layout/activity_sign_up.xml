@@ -12,9 +12,10 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/bungee"
+        android:fontFamily="@font/quicksand_bold"
         android:includeFontPadding="false"
         android:text="@string/welcome"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_intro" />
 
     <TextView
@@ -24,87 +25,115 @@
         android:fontFamily="@font/poppins_light"
         android:text="@string/sign_up_to_connect_to_the_world" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilUsername"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/username"
-        app:endIconMode="clear_text"
-        app:endIconTint="@color/colorIcon"
-        app:startIconDrawable="@drawable/ic_round_user_24">
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_round_user_24"
+            android:drawablePadding="@dimen/padding_horizontal"
+            android:drawableTint="@color/colorGray"
             android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="@string/username"
             android:inputType="textPersonName"
+            android:padding="@dimen/margin_horizontal"
             android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/text_default" />
+            android:textSize="@dimen/text_default"
+            tools:targetApi="m" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilPassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical"
-        android:hint="@string/password"
-        app:passwordToggleEnabled="true"
-        app:startIconDrawable="@drawable/ic_round_password_24">
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_round_password_24"
+            android:drawablePadding="@dimen/padding_horizontal"
+            android:drawableTint="@color/colorGray"
             android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="@string/password"
             android:inputType="textPassword"
+            android:padding="@dimen/margin_horizontal"
             android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/text_default" />
+            android:textSize="@dimen/text_default"
+            tools:targetApi="m" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tilRetypePassword"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/retype_password"
-        app:passwordToggleEnabled="true"
-        app:startIconDrawable="@drawable/ic_round_password_24">
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etPasswordRetype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/ic_round_password_24"
+            android:drawablePadding="@dimen/padding_horizontal"
+            android:drawableTint="@color/colorGray"
             android:fontFamily="@font/poppins"
+            android:gravity="center_vertical"
+            android:hint="@string/retype_password"
             android:inputType="textPassword"
+            android:padding="@dimen/margin_horizontal"
             android:textColor="@color/colorLightBlack"
-            android:textSize="@dimen/text_default" />
+            android:textSize="@dimen/text_default"
+            tools:targetApi="m" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.cardview.widget.CardView>
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/margin_vertical"
-        android:background="@drawable/background_positive"
         android:foreground="?attr/selectableItemBackground"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_horizontal">
+        app:cardBackgroundColor="@color/colorBlue2"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/sign_up"
-            android:textAlignment="center"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/button_text_size" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_vertical">
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/sign_up"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_text_size" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -115,17 +144,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_have_account"
-            android:textSize="@dimen/text_title" />
+            android:fontFamily="@font/poppins"
+            android:text="@string/already_have_account" />
 
         <TextView
             android:id="@+id/tvSignIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/padding_horizontal"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/sign_in"
-            android:textColor="@color/colorBlue2"
-            android:textSize="@dimen/text_title"
-            android:textStyle="bold" />
+            android:textColor="@color/colorBlue2" />
     </LinearLayout>
 </LinearLayout>

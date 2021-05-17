@@ -18,7 +18,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
 
-        // Start client socket
+        // Open socket
         Client client = Client.getInstance();
         responseMessage = client.responseMessageLiveData();
 
@@ -36,4 +36,5 @@ public class App extends Application {
             manager.createNotificationChannel(notificationChannel);
         }
     }
+
 }

@@ -14,16 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatClient">
 
-        <activity android:name=".ui.user.UserSignUpActivity"/>
-        <activity android:name=".ui.user.UserSignInActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.main.MainActivity" />
-
+        <activity android:name=".ui.user.UserSignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.user.UserSignInActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

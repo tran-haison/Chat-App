@@ -1,12 +1,12 @@
 package com.example.chat_client.socket;
 
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -18,7 +18,7 @@ public class Client {
 
     private Socket socket;
     private BufferedReader input;
-    private boolean isSocketRunning = false;
+    private final Handler handler = new Handler();
     private final MutableLiveData<String> responseMessage = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
@@ -26,7 +26,7 @@ public class Client {
     public static final int PORT = 54000;
 
     private Client() {
-        connect();
+        connectToServer();
     }
 
     public synchronized static Client getInstance() {
@@ -36,7 +36,7 @@ public class Client {
         return client;
     }
 
-    private void connect() {
+    private void connectToServer() {
         Thread thread = new Thread(() -> {
             try {
                 // Establish connection
@@ -57,6 +57,31 @@ public class Client {
         thread.start();
     }
 
+    private void listenForResponse() {
+        Log.d(TAG, "Listening for server response...");
+
+        int charsRead;
+        char[] buffer = new char[1024];
+
+        // Infinite loop listening for response from server
+        while (true) {
+            try {
+                charsRead = input.read(buffer);
+                String message = new String(buffer).substring(0, charsRead);
+                if (message != null) {
+                    Log.d(TAG, "Server response: " + message);
+                    handler.post(() -> responseMessage.setValue(message));
+                } else {
+                    Log.d(TAG, "Server response nothing!");
+                }
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                Log.d(TAG, "Error: " + e.getMessage());
+                break;
+            }
+        }
+    }
+
     public void sendMessage(final String message) {
         Thread thread = new Thread(() -> {
             try {
@@ -72,30 +97,6 @@ public class Client {
             }
         });
         thread.start();
-    }
-
-    private void listenForResponse() {
-        isSocketRunning = true;
-        Log.d(TAG, "Listening for server response...");
-        int count = 0;
-        while (isSocketRunning) {
-            try {
-                //input.readLine().wait();
-                String message = input.readLine();
-                if (message != null) {
-                    Log.d(TAG, "Server response: " + message);
-                    //responseMessage.setValue(message);
-                } else {
-                    Log.d(TAG, "Server response nothing!");
-                }
-                Log.d(TAG, "Counting: " + count++);
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                isSocketRunning = false;
-                Log.d(TAG, "Error: " + e.getMessage());
-                break;
-            }
-        }
     }
 
     public void closeSocket() {

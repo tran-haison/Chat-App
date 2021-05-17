@@ -12,4 +12,5 @@
     <string name="sign_up_to_connect_to_the_world">Sign up to connect to the world</string>
     <string name="welcome">Welcome,</string>
     <string name="already_have_account">Already have account?</string>
+    <string name="chat_app">Chat App</string>
 </resources>

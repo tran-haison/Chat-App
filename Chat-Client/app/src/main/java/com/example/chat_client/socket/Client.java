@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.InetAddress;
@@ -21,8 +22,8 @@ public class Client {
     private final MutableLiveData<String> responseMessage = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
-    public static final String IP_ADDRESS = "192.168.1.16";
-    public static final int PORT = 8080;
+    public static final String IP_ADDRESS = "192.168.1.14";
+    public static final int PORT = 54000;
 
     private Client() {
         connect();
@@ -45,16 +46,11 @@ public class Client {
                 Log.d(TAG, "Connected to server!");
                 Log.d(TAG, "Server address: " + serverAddress.toString());
 
-                // Listening for response from server
-                try {
-                    input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    listeningForResponse();
-                } catch (Exception e) {
-                    Log.d(TAG, "Error getting input stream: " + e.getMessage());
-                    e.printStackTrace();
-                }
+                // Listen for response from server
+                input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                listenForResponse();
             } catch (Exception e) {
-                Log.d(TAG, "Error unknown: " + e.getMessage());
+                Log.d(TAG, "Error establish connection: " + e.getMessage());
                 e.printStackTrace();
             }
         });
@@ -78,11 +74,13 @@ public class Client {
         thread.start();
     }
 
-    private void listeningForResponse() {
+    private void listenForResponse() {
         isSocketRunning = true;
         Log.d(TAG, "Listening for server response...");
+        int count = 0;
         while (isSocketRunning) {
             try {
+                //input.readLine().wait();
                 String message = input.readLine();
                 if (message != null) {
                     Log.d(TAG, "Server response: " + message);
@@ -90,9 +88,11 @@ public class Client {
                 } else {
                     Log.d(TAG, "Server response nothing!");
                 }
+                Log.d(TAG, "Counting: " + count++);
+                Thread.sleep(1000);
             } catch (Exception e) {
-                Log.d(TAG, "Error receiving from server: " + e.getMessage());
-                e.printStackTrace();
+                isSocketRunning = false;
+                Log.d(TAG, "Error: " + e.getMessage());
                 break;
             }
         }

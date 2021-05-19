@@ -16,32 +16,38 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginHorizontal="@dimen/margin_horizontal"
-            android:layout_toStartOf="@id/ivUserAva"
+            android:layout_toStartOf="@id/llUser"
             android:fontFamily="@font/quicksand_bold"
+            android:includeFontPadding="false"
             android:text="@string/app_name"
             android:textColor="@color/black"
             android:textSize="@dimen/text_tool_bar" />
 
-        <ImageView
-            android:id="@+id/ivUserAva"
-            android:layout_width="@dimen/iv_size"
-            android:layout_height="@dimen/iv_size"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/tvUsername"
-            android:contentDescription="@string/username"
-            android:src="@drawable/ic_user" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvUsername"
+        <LinearLayout
+            android:id="@+id/llUser"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/padding_horizontal"
-            android:layout_marginEnd="@dimen/margin_horizontal"
-            android:fontFamily="@font/poppins_medium"
-            android:text="@string/username"
-            android:textColor="@color/colorLightBlack" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/margin_horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/iv_size"
+                android:layout_height="@dimen/iv_size"
+                android:contentDescription="@string/username"
+                android:src="@drawable/img_user1" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding_horizontal"
+                android:fontFamily="@font/poppins_medium"
+                android:includeFontPadding="false"
+                android:text="@string/username"
+                android:textColor="@color/colorLightBlack" />
+        </LinearLayout>
+
     </RelativeLayout>
 
     <FrameLayout

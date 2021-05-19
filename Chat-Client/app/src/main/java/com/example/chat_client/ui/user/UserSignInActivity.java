@@ -59,17 +59,14 @@ public class UserSignInActivity extends AppCompatActivity {
                     Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
                     goToMainActivity(user);
                     break;
-                default:
-                    Snackbar.make(binding.getRoot(), Constants.UNKNOWN_ERROR, Snackbar.LENGTH_SHORT).show();
-                    break;
             }
         });
     }
 
     private void signIn() {
         // Get text from edit text
-        String username = binding.etUsername.getText().toString();
-        String password = binding.etPassword.getText().toString();
+        String username = Objects.requireNonNull(binding.etUsername.getText()).toString();
+        String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
 
         user = new User(username, password);
         if (!user.isUsernameValid()) {

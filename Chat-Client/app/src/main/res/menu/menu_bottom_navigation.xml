@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/friendFragment"
+        android:icon="@drawable/ic_friends"
+        android:title="@string/friend" />
+
+    <item
+        android:id="@+id/groupFragment"
+        android:icon="@drawable/ic_group"
+        android:title="@string/group" />
+
+    <item
+        android:id="@+id/friendRequestFragment"
+        android:icon="@drawable/ic_friend_request"
+        android:title="@string/request" />
+
+    <item
+        android:id="@+id/networkFragment"
+        android:icon="@drawable/ic_networking"
+        android:title="@string/network" />
+
+</menu>

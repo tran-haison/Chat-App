@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.fragments.FriendFragment">
+    tools:context=".ui.main.fragments.NetworkFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvNetworkTab"
@@ -16,26 +16,15 @@
         app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="0dp">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etSearch"
+        <com.google.android.material.tabs.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableStart="@drawable/ic_round_search_24"
-            android:drawablePadding="@dimen/padding_horizontal"
-            android:drawableTint="@color/colorGray"
-            android:fontFamily="@font/poppins"
-            android:hint="@string/search_friend"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding_horizontal"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_default"
-            tools:targetApi="m" />
+            android:id="@+id/tlNetwork"/>
 
     </androidx.cardview.widget.CardView>
 
     <ListView
-        android:id="@+id/lvFriends"
+        android:id="@+id/lvNetwork"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/cvNetworkTab"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.fragments.FriendFragment">
+    tools:context=".ui.main.fragments.GroupFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvNetworkTab"
@@ -25,7 +25,7 @@
             android:drawablePadding="@dimen/padding_horizontal"
             android:drawableTint="@color/colorGray"
             android:fontFamily="@font/poppins"
-            android:hint="@string/search_friend"
+            android:hint="@string/search_group"
             android:inputType="textPersonName"
             android:padding="@dimen/padding_horizontal"
             android:textColor="@color/black"
@@ -35,7 +35,7 @@
     </androidx.cardview.widget.CardView>
 
     <ListView
-        android:id="@+id/lvFriends"
+        android:id="@+id/lvGroups"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/cvNetworkTab"

@@ -14,6 +14,8 @@ import com.example.chat_client.ui.main.MainActivity;
 import com.example.chat_client.utils.Constants;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Objects;
+
 import static com.example.chat_client.socket.ResponseMessage.FAIL_USERNAME_ALREADY_EXIST;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS;
 import static com.example.chat_client.utils.Constants.BUNDLE;
@@ -48,17 +50,15 @@ public class UserSignUpActivity extends AppCompatActivity {
             } else if (message.equals(SUCCESS)) {
                 Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
                 goToMainActivity(user);
-            } else {
-                Snackbar.make(binding.getRoot(), Constants.UNKNOWN_ERROR, Snackbar.LENGTH_SHORT).show();
             }
         });
     }
 
     private void signUp() {
         // Get text from edit text
-        String username = binding.etUsername.getText().toString();
-        String password = binding.etPassword.getText().toString();
-        String passwordRetype = binding.etPasswordRetype.getText().toString();
+        String username = Objects.requireNonNull(binding.etUsername.getText()).toString();
+        String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
+        String passwordRetype = Objects.requireNonNull(binding.etPasswordRetype.getText()).toString();
 
         // Check user info
         user = new User(username, password);

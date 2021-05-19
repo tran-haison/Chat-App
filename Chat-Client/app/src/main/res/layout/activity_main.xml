@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/padding_horizontal"
-                android:fontFamily="@font/poppins_medium"
+                android:fontFamily="@font/poppins"
                 android:includeFontPadding="false"
                 android:text="@string/username"
                 android:textColor="@color/colorLightBlack" />
@@ -51,7 +51,6 @@
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/flFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/bottomNavigationView"

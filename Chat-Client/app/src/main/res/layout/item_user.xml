@@ -12,7 +12,7 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/margin_horizontal"
         android:contentDescription="@string/username"
-        android:src="@drawable/img_user2" />
+        android:src="@drawable/img_user1" />
 
     <TextView
         android:id="@+id/tvUsername"

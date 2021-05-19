@@ -57,7 +57,7 @@ public class UserSignInActivity extends AppCompatActivity {
                     break;
                 case SUCCESS:
                     Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
-                    goToMainActivity(user);
+                    goToMainActivity();
                     break;
             }
         });
@@ -78,7 +78,7 @@ public class UserSignInActivity extends AppCompatActivity {
         }
     }
 
-    private void goToMainActivity(User user) {
+    private void goToMainActivity() {
         Bundle bundle = new Bundle();
         bundle.putSerializable(USER, user);
         Intent intent = new Intent(this, MainActivity.class);

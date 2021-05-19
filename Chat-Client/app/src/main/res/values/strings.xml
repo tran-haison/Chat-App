@@ -19,4 +19,8 @@
     <string name="network">Network</string>
     <string name="search_group">Search group</string>
     <string name="_3_members">3 members</string>
+    <string name="back">Back</string>
+    <string name="profile">Profile</string>
+    <string name="user_avatar">User avatar</string>
+    <string name="update_profile">Update profile</string>
 </resources>

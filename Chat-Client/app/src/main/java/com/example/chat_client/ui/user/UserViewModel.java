@@ -24,6 +24,14 @@ public class UserViewModel extends ViewModel {
         client.sendMessage(RequestMessage.signIn(user));
     }
 
+    public void signOutUser() {
+        client.sendMessage(RequestMessage.signOut());
+    }
+
+    public void updateUser(User user) {
+        client.sendMessage(RequestMessage.updateUser(user));
+    }
+
     public LiveData<String> getResponseMessageLiveData() {
         return App.responseMessage;
     }

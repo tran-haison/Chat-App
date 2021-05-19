@@ -13,4 +13,12 @@ public class RequestMessage {
     public static String signIn(User user) {
         return "SIGNIN " + user.getUsername() + " " + user.getPassword();
     }
+
+    public static String signOut() {
+        return "SIGNOUT";
+    }
+
+    public static String updateUser(User user) {
+        return "UPDATE " + user.getUsername() + " " + user.getPassword();
+    }
 }

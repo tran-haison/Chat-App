@@ -49,7 +49,7 @@ public class UserSignUpActivity extends AppCompatActivity {
                 Snackbar.make(binding.getRoot(), FAIL_USERNAME_ALREADY_EXIST, Snackbar.LENGTH_SHORT).show();
             } else if (message.equals(SUCCESS)) {
                 Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
-                goToMainActivity(user);
+                goToMainActivity();
             }
         });
     }
@@ -73,7 +73,7 @@ public class UserSignUpActivity extends AppCompatActivity {
         }
     }
 
-    private void goToMainActivity(User user) {
+    private void goToMainActivity() {
         Bundle bundle = new Bundle();
         bundle.putSerializable(USER, user);
         Intent intent = new Intent(this, MainActivity.class);

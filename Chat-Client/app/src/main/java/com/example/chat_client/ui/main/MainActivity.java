@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-        // Setup
+        // Setup ViewModel
         setupViewModel();
         getIntentValue();
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.bottomNavigationView, Navigation.findNavController(this, R.id.mainNavHostFragment));
 
         // View events
-        binding.llUser.setOnClickListener(v -> goToUserInfoActivity());
+        binding.llUser.setOnClickListener(v -> startActivity(new Intent(this, UserInfoActivity.class)));
     }
 
     private void setupViewModel() {
@@ -60,11 +60,4 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void goToUserInfoActivity() {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(USER, user);
-        Intent intent = new Intent(this, UserInfoActivity.class);
-        intent.putExtra(BUNDLE, bundle);
-        startActivity(intent);
-    }
 }

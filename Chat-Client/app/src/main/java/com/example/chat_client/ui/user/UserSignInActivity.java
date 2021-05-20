@@ -18,7 +18,7 @@ import java.util.Objects;
 
 import static com.example.chat_client.socket.ResponseMessage.FAIL_INCORRECT_USERNAME_OR_PASSWORD;
 import static com.example.chat_client.socket.ResponseMessage.FAIL_USER_ALREADY_SIGN_IN;
-import static com.example.chat_client.socket.ResponseMessage.SUCCESS;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_SIGN_IN;
 import static com.example.chat_client.utils.Constants.BUNDLE;
 import static com.example.chat_client.utils.Constants.USER;
 
@@ -55,8 +55,9 @@ public class UserSignInActivity extends AppCompatActivity {
                 case FAIL_INCORRECT_USERNAME_OR_PASSWORD:
                     Snackbar.make(binding.getRoot(), FAIL_INCORRECT_USERNAME_OR_PASSWORD, Snackbar.LENGTH_SHORT).show();
                     break;
-                case SUCCESS:
-                    Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
+                case SUCCESS_SIGN_IN:
+                    Toast.makeText(this, SUCCESS_SIGN_IN, Toast.LENGTH_SHORT).show();
+                    viewModel.setUser(user);
                     goToMainActivity();
                     break;
             }

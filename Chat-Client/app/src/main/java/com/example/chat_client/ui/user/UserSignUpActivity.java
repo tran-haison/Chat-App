@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 import static com.example.chat_client.socket.ResponseMessage.FAIL_USERNAME_ALREADY_EXIST;
-import static com.example.chat_client.socket.ResponseMessage.SUCCESS;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_SIGN_UP;
 import static com.example.chat_client.utils.Constants.BUNDLE;
 import static com.example.chat_client.utils.Constants.USER;
 
@@ -47,8 +47,9 @@ public class UserSignUpActivity extends AppCompatActivity {
         viewModel.getResponseMessageLiveData().observe(this, message -> {
             if (message.equals(FAIL_USERNAME_ALREADY_EXIST)) {
                 Snackbar.make(binding.getRoot(), FAIL_USERNAME_ALREADY_EXIST, Snackbar.LENGTH_SHORT).show();
-            } else if (message.equals(SUCCESS)) {
-                Toast.makeText(this, SUCCESS, Toast.LENGTH_SHORT).show();
+            } else if (message.equals(SUCCESS_SIGN_UP)) {
+                Toast.makeText(this, SUCCESS_SIGN_UP, Toast.LENGTH_SHORT).show();
+                viewModel.setUser(user);
                 goToMainActivity();
             }
         });

@@ -18,8 +18,6 @@ import java.util.Objects;
 
 import static com.example.chat_client.socket.ResponseMessage.FAIL_USERNAME_ALREADY_EXIST;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_SIGN_UP;
-import static com.example.chat_client.utils.Constants.BUNDLE;
-import static com.example.chat_client.utils.Constants.USER;
 
 public class UserSignUpActivity extends AppCompatActivity {
 
@@ -75,10 +73,7 @@ public class UserSignUpActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity() {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(USER, user);
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(BUNDLE, bundle);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

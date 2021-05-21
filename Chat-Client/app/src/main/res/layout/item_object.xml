@@ -2,11 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
     android:paddingHorizontal="@dimen/margin_horizontal"
     android:paddingVertical="@dimen/margin_vertical">
 
     <ImageView
-        android:id="@+id/ivUserAva"
+        android:id="@+id/ivAva"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerVertical="true"
@@ -15,11 +16,11 @@
         android:src="@drawable/img_user1" />
 
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@id/ivUserAva"
+        android:layout_toEndOf="@id/ivAva"
         android:fontFamily="@font/quicksand_medium"
         android:includeFontPadding="false"
         android:text="@string/username"

@@ -17,7 +17,7 @@ import java.util.Objects;
 
 import static com.example.chat_client.socket.ResponseMessage.FAIL_USERNAME_ALREADY_EXIST;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_SIGN_OUT;
-import static com.example.chat_client.socket.ResponseMessage.SUCCESS_UPDATE_USER;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_UPDATE;
 
 public class UserInfoActivity extends AppCompatActivity {
 
@@ -35,9 +35,13 @@ public class UserInfoActivity extends AppCompatActivity {
         // Setup ViewModel
         setupViewModel();
 
+        // Setup data binding
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
+
         // View events
         binding.ibBack.setOnClickListener(v -> onBackPressed());
-        binding.ibSignOut.setOnClickListener(v -> signOut());
+        binding.ibSignOut.setOnClickListener(v -> viewModel.signOutUser());
         binding.btnUpdateProfile.setOnClickListener(v -> updateUser());
     }
 
@@ -45,35 +49,24 @@ public class UserInfoActivity extends AppCompatActivity {
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
 
         // Observe response from server
-        viewModel.getResponseMessageLiveData().observe(this, message -> {
-            if (message.equals(FAIL_USERNAME_ALREADY_EXIST)) {
+        viewModel.getResponseMessageLiveData().observe(this, this::handleResponseMessage);
+
+        viewModel.userLiveData.observe(this, user -> this.user = user);
+    }
+
+    private void handleResponseMessage(String message) {
+        switch (message) {
+            case FAIL_USERNAME_ALREADY_EXIST:
                 Snackbar.make(binding.getRoot(), FAIL_USERNAME_ALREADY_EXIST, Snackbar.LENGTH_SHORT).show();
-            } else if (message.equals(SUCCESS_UPDATE_USER)) {
-                Toast.makeText(this, SUCCESS_UPDATE_USER, Toast.LENGTH_SHORT).show();
-                viewModel.setUser(updatedUser);
-            } else if (message.equals(SUCCESS_SIGN_OUT)) {
-                Intent intent = new Intent(this, UserSignInActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
-
-        // Observe user updated
-        viewModel.getUserLiveData().observe(this, user -> {
-            this.user = user;
-            setUserInfo();
-        });
-    }
-
-    private void setUserInfo() {
-        binding.tvUsername.setText(user.getUsername());
-        binding.etUsername.setText(user.getUsername());
-        binding.etPassword.setText(user.getPassword());
-    }
-
-    private void signOut() {
-        viewModel.setUser(null);
-        viewModel.signOutUser();
+                break;
+            case SUCCESS_UPDATE:
+                Toast.makeText(this, SUCCESS_UPDATE, Toast.LENGTH_SHORT).show();
+                saveUserInfo();
+                break;
+            case SUCCESS_SIGN_OUT:
+                returnToUserSignInActivity();
+                break;
+        }
     }
 
     private void updateUser() {
@@ -94,4 +87,15 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
+    private void saveUserInfo() {
+        if (updatedUser != null) {
+            viewModel.setUser(updatedUser);
+        }
+    }
+
+    private void returnToUserSignInActivity() {
+        Intent intent = new Intent(this, UserSignInActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 }

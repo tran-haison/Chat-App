@@ -1,78 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.chat_client.ui.main.MainViewModel" />
+    </data>
 
     <RelativeLayout
-        android:id="@+id/rlToolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginHorizontal="@dimen/margin_horizontal"
-            android:layout_toStartOf="@id/llUser"
-            android:fontFamily="@font/quicksand_bold"
-            android:includeFontPadding="false"
-            android:text="@string/app_name"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_tool_bar" />
-
-        <LinearLayout
-            android:id="@+id/llUser"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/margin_horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/iv_size"
-                android:layout_height="@dimen/iv_size"
-                android:contentDescription="@string/username"
-                android:src="@drawable/img_user1" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/padding_horizontal"
-                android:fontFamily="@font/poppins"
-                android:includeFontPadding="false"
-                android:text="@string/username"
-                android:textColor="@color/colorLightBlack" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigationView"
-        android:layout_below="@id/rlToolbar">
+        tools:context=".ui.main.MainActivity">
 
-        <fragment
-            android:id="@+id/mainNavHostFragment"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <RelativeLayout
+            android:id="@+id/rlToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_toStartOf="@id/llUser"
+                android:fontFamily="@font/quicksand_bold"
+                android:includeFontPadding="false"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_tool_bar" />
+
+            <LinearLayout
+                android:id="@+id/llUser"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/margin_horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/iv_size"
+                    android:layout_height="@dimen/iv_size"
+                    android:contentDescription="@string/username"
+                    android:src="@drawable/img_user1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/padding_horizontal"
+                    android:fontFamily="@font/poppins"
+                    android:includeFontPadding="false"
+                    android:text="@{viewModel.userLiveData.username}"
+                    android:textColor="@color/colorLightBlack" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/main_nav_graph" />
+            android:layout_above="@id/bottomNavigationView"
+            android:layout_below="@id/rlToolbar">
 
-    </FrameLayout>
+            <fragment
+                android:id="@+id/mainNavHostFragment"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/main_nav_graph" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/white"
-        android:elevation="@dimen/elevation"
-        app:menu="@menu/menu_bottom_navigation" />
+        </FrameLayout>
 
-</RelativeLayout>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:elevation="@dimen/elevation"
+            app:menu="@menu/menu_bottom_navigation" />
+
+    </RelativeLayout>
+</layout>

@@ -5,33 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.main.fragments.FriendFragment">
+    tools:context=".ui.search.SearchActivity">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_horizontal"
-        android:layout_marginBottom="@dimen/margin_vertical"
+        android:layout_margin="@dimen/margin_horizontal"
         android:foreground="?attr/selectableItemBackground"
-        app:cardBackgroundColor="@color/colorLightGray"
-        app:cardCornerRadius="@dimen/card_radius"
+        app:cardBackgroundColor="@color/colorBlue2"
+        app:cardCornerRadius="50dp"
         app:cardElevation="0dp">
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/padding_horizontal"
-            android:fontFamily="@font/poppins_light"
-            android:padding="@dimen/margin_vertical"
-            android:text="@string/search_friend"
-            app:drawableStartCompat="@drawable/ic_round_search_24"
-            app:drawableTint="@color/colorGray" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ibBack"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:contentDescription="@string/back"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/text_title" />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <ListView
-        android:id="@+id/lvFriends"
+        android:id="@+id/lvSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -40,7 +58,7 @@
         android:visibility="gone" />
 
     <LinearLayout
-        android:id="@+id/llFriendPrompt"
+        android:id="@+id/llSearchPrompt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -48,19 +66,18 @@
         android:padding="@dimen/margin_horizontal">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/lavFriend"
+            android:id="@+id/lavSearch"
             android:layout_width="100dp"
             android:layout_height="120dp"
-            android:layout_marginBottom="@dimen/margin_vertical"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/animation_chat" />
+            app:lottie_rawRes="@raw/animation_search" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_horizontal"
             android:fontFamily="@font/poppins"
-            android:text="@string/do_not_have_any_friend_find_now"
+            android:text="@string/finding_your_soul_mate"
             android:textAlignment="center"
             android:textColor="@color/colorLightBlack" />
 

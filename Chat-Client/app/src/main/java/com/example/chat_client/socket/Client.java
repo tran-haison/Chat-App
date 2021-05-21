@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.chat_client.models.User;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -18,8 +20,10 @@ public class Client {
 
     private Socket socket;
     private BufferedReader input;
+
     private final Handler handler = new Handler();
     private final MutableLiveData<String> responseMessage = new MutableLiveData<>();
+    private final MutableLiveData<User> userMutableLiveData = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
     public static final String IP_ADDRESS = "192.168.1.14";
@@ -68,12 +72,8 @@ public class Client {
             try {
                 charsRead = input.read(buffer);
                 String message = new String(buffer).substring(0, charsRead);
-                if (message != null) {
-                    Log.d(TAG, "Server response: " + message);
-                    handler.post(() -> responseMessage.setValue(message));
-                } else {
-                    Log.d(TAG, "Server response nothing!");
-                }
+                Log.d(TAG, "Server response: " + message);
+                handler.post(() -> responseMessage.setValue(message));
                 Thread.sleep(1000);
             } catch (Exception e) {
                 Log.d(TAG, "Error: " + e.getMessage());
@@ -107,7 +107,16 @@ public class Client {
         }
     }
 
+    public void setUser(User user) {
+        this.userMutableLiveData.setValue(user);
+    }
+
+    public LiveData<User> getUserLiveData() {
+        return userMutableLiveData;
+    }
+
     public LiveData<String> responseMessageLiveData() {
         return responseMessage;
     }
+
 }

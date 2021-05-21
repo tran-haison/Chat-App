@@ -27,6 +27,10 @@ android {
         viewBinding true
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -34,7 +38,6 @@ android {
 }
 
 dependencies {
-    def room_version = "2.3.0"
     def lifecycle_version = "2.3.1"
     def nav_version = "2.3.5"
 

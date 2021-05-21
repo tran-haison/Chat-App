@@ -1,7 +1,6 @@
 package com.example.chat_client.ui.user;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.chat_client.App;
@@ -12,10 +11,15 @@ import com.example.chat_client.socket.RequestMessage;
 public class UserViewModel extends ViewModel {
 
     private final Client client;
-    private final MutableLiveData<User> userMutableLiveData = new MutableLiveData<>();
+    public final LiveData<User> userLiveData;
 
     public UserViewModel() {
         client = Client.getInstance();
+        userLiveData = client.getUserLiveData();
+    }
+
+    public void setUser(User user) {
+        client.setUser(user);
     }
 
     public void signUpUser(User user) {
@@ -32,14 +36,6 @@ public class UserViewModel extends ViewModel {
 
     public void updateUser(User user) {
         client.sendMessage(RequestMessage.updateUser(user));
-    }
-
-    public void setUser(User user) {
-        userMutableLiveData.setValue(user);
-    }
-
-    public LiveData<User> getUserLiveData() {
-        return userMutableLiveData;
     }
 
     public LiveData<String> getResponseMessageLiveData() {

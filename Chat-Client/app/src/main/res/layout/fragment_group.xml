@@ -1,46 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.main.fragments.GroupFragment">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cvNetworkTab"
+        android:id="@+id/cvSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_horizontal"
         android:layout_marginBottom="@dimen/margin_vertical"
+        android:foreground="?attr/selectableItemBackground"
         app:cardBackgroundColor="@color/colorLightGray"
         app:cardCornerRadius="@dimen/card_radius"
         app:cardElevation="0dp">
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etSearch"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:drawableStart="@drawable/ic_round_search_24"
             android:drawablePadding="@dimen/padding_horizontal"
-            android:drawableTint="@color/colorGray"
-            android:fontFamily="@font/poppins"
-            android:hint="@string/search_group"
-            android:inputType="textPersonName"
-            android:padding="@dimen/padding_horizontal"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_default"
-            tools:targetApi="m" />
+            android:fontFamily="@font/poppins_light"
+            android:padding="@dimen/margin_vertical"
+            android:text="@string/search_group"
+            app:drawableStartCompat="@drawable/ic_round_search_24"
+            app:drawableTint="@color/colorGray" />
 
     </androidx.cardview.widget.CardView>
 
-    <ListView
-        android:id="@+id/lvGroups"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/cvNetworkTab"
-        android:clipToPadding="false"
-        android:divider="@color/white"
-        android:dividerHeight="0dp" />
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <ListView
+            android:id="@+id/lvGroups"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@color/white"
+            android:dividerHeight="0dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/llGroupPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/margin_horizontal">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lavGroup"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
+                android:layout_marginBottom="@dimen/margin_vertical"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/animation_chat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:fontFamily="@font/poppins"
+                android:text="@string/join_a_group_or_create_a_new_one"
+                android:textAlignment="center"
+                android:textColor="@color/colorLightBlack" />
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCreateGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/margin_horizontal"
+            android:backgroundTint="@color/colorBlue2"
+            android:contentDescription="@string/create_group"
+            android:elevation="@dimen/elevation"
+            android:src="@drawable/ic_round_add_24"
+            app:tint="@android:color/white" />
+
+    </RelativeLayout>
+
+</LinearLayout>

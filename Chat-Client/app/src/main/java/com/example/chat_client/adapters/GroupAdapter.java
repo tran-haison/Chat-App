@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 
 import com.bumptech.glide.Glide;
 import com.example.chat_client.R;
-import com.example.chat_client.databinding.ItemGroupBinding;
+import com.example.chat_client.databinding.ItemObjectBinding;
 import com.example.chat_client.models.Group;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class GroupAdapter extends BaseAdapter {
         // Init view
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            viewHolder.binding = ItemGroupBinding.inflate(LayoutInflater.from(context), parent, false);
+            viewHolder.binding = ItemObjectBinding.inflate(LayoutInflater.from(context), parent, false);
             convertView = viewHolder.binding.getRoot();
             convertView.setTag(viewHolder);
         } else {
@@ -59,8 +59,7 @@ public class GroupAdapter extends BaseAdapter {
 
         // Set value to view
         Group group = groups.get(position);
-        viewHolder.binding.tvGroupName.setText(group.getName());
-        viewHolder.binding.tvGroupMember.setText(group.getNumberOfMember() + " member(s)");
+        viewHolder.binding.tvName.setText(group.getName());
         viewHolder.binding.getRoot().setOnClickListener(v -> itemListener.onItemClicked(group));
 
         // Load random ava into image view
@@ -72,12 +71,12 @@ public class GroupAdapter extends BaseAdapter {
         };
         Random random = new Random();
         int ava = random.nextInt(groupAvatars.length);
-        Glide.with(context).load(groupAvatars[ava]).into(viewHolder.binding.ivGroupAva);
+        Glide.with(context).load(groupAvatars[ava]).into(viewHolder.binding.ivAva);
 
         return convertView;
     }
 
-    private static class ViewHolder{
-        ItemGroupBinding binding;
+    private static class ViewHolder {
+        ItemObjectBinding binding;
     }
 }

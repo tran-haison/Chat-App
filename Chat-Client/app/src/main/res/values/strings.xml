@@ -23,4 +23,9 @@
     <string name="profile">Profile</string>
     <string name="user_avatar">User avatar</string>
     <string name="update_profile">Update profile</string>
+    <string name="search">Search</string>
+    <string name="finding_your_soul_mate">Finding your soul mate…</string>
+    <string name="do_not_have_any_friend_find_now">Don\'t have any friend? Find one :)</string>
+    <string name="join_a_group_or_create_a_new_one">Join a group or create a new one</string>
+    <string name="create_group">Create group</string>
 </resources>

@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 
 import com.bumptech.glide.Glide;
 import com.example.chat_client.R;
-import com.example.chat_client.databinding.ItemUserBinding;
+import com.example.chat_client.databinding.ItemObjectBinding;
 import com.example.chat_client.models.User;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class UserAdapter extends BaseAdapter {
         // Init view
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            viewHolder.binding = ItemUserBinding.inflate(LayoutInflater.from(context), parent, false);
+            viewHolder.binding = ItemObjectBinding.inflate(LayoutInflater.from(context), parent, false);
             convertView = viewHolder.binding.getRoot();
             convertView.setTag(viewHolder);
         } else {
@@ -57,7 +57,7 @@ public class UserAdapter extends BaseAdapter {
 
         // Set value to view
         User user = users.get(position);
-        viewHolder.binding.tvUsername.setText(user.getUsername());
+        viewHolder.binding.tvName.setText(user.getUsername());
         viewHolder.binding.getRoot().setOnClickListener(v -> itemListener.onItemClicked(user));
 
         // Load random ava into image view
@@ -69,13 +69,13 @@ public class UserAdapter extends BaseAdapter {
         };
         Random random = new Random();
         int ava = random.nextInt(userAvatars.length);
-        Glide.with(context).load(userAvatars[ava]).into(viewHolder.binding.ivUserAva);
+        Glide.with(context).load(userAvatars[ava]).into(viewHolder.binding.ivAva);
 
         return convertView;
     }
 
     private static class ViewHolder {
-        ItemUserBinding binding;
+        ItemObjectBinding binding;
     }
 
 }

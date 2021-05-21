@@ -2,11 +2,13 @@ package com.example.chat_client.utils;
 
 public class Constants {
 
-    // Key to pass data between activity/fragment
-    public static final String USER = "user";
+    public static final String FRIEND = "friend";
     public static final String BUNDLE = "bundle";
+    public static final String SEARCH_TYPE = "search type";
+
+    public static final String SEARCH_USER = "search user";
+    public static final String SEARCH_GROUP = "search group";
 
     public static final String USERNAME_INVALID = "Username is invalid!";
     public static final String PASSWORD_INVALID = "Password is invalid!";
-    public static final String UNKNOWN_ERROR = "UNKNOWN ERROR";
 }

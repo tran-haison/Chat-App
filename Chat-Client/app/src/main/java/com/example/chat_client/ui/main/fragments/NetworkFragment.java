@@ -12,7 +12,6 @@ import com.example.chat_client.R;
 
 public class NetworkFragment extends Fragment {
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

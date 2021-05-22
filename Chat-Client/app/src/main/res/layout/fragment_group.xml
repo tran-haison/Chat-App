@@ -76,12 +76,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/margin_horizontal"
+            android:layout_marginStart="@dimen/margin_horizontal"
+            android:layout_marginTop="@dimen/margin_horizontal"
+            android:layout_marginEnd="@dimen/margin_horizontal"
+            android:layout_marginBottom="@dimen/margin_horizontal"
+            android:background="?attr/selectableItemBackground"
             android:backgroundTint="@color/colorBlue2"
             android:contentDescription="@string/create_group"
             android:elevation="@dimen/elevation"
             android:src="@drawable/ic_round_add_24"
-            app:tint="@android:color/white" />
+            app:backgroundTint="@color/colorBlue2"
+            app:tint="@color/white" />
 
     </RelativeLayout>
 

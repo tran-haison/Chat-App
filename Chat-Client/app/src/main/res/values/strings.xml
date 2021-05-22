@@ -28,4 +28,8 @@
     <string name="do_not_have_any_friend_find_now">Don\'t have any friend? Find one :)</string>
     <string name="join_a_group_or_create_a_new_one">Join a group or create a new one</string>
     <string name="create_group">Create group</string>
+    <string name="enter_group_name">Enter group name</string>
+    <string name="enter_name">Enter name</string>
+    <string name="Continue">Continue</string>
+    <string name="Cancel">Cancel</string>
 </resources>

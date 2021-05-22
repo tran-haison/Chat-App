@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class User implements Serializable {
+public class User implements Serializable, Validator {
 
     private final String username;
     private final String password;
@@ -22,7 +22,8 @@ public class User implements Serializable {
         return password;
     }
 
-    public boolean isUsernameValid() {
+    @Override
+    public boolean isNameValid() {
         // Username can only contain a-z characters, number and underscore
         String regex = "^[A-Za-z]\\w{0,29}$";
         Pattern pattern = Pattern.compile(regex);
@@ -44,4 +45,5 @@ public class User implements Serializable {
     public String toString() {
         return username + " " + password;
     }
+
 }

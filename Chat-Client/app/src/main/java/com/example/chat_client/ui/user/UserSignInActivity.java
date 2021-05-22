@@ -68,7 +68,7 @@ public class UserSignInActivity extends AppCompatActivity {
         String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
 
         user = new User(username, password);
-        if (!user.isUsernameValid()) {
+        if (!user.isNameValid()) {
             Snackbar.make(binding.getRoot(), Constants.USERNAME_INVALID, Snackbar.LENGTH_SHORT).show();
         } else if (!user.isPasswordValid()) {
             Snackbar.make(binding.getRoot(), Constants.PASSWORD_INVALID, Snackbar.LENGTH_SHORT).show();

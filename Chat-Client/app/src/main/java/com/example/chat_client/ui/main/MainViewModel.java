@@ -17,51 +17,52 @@ public class MainViewModel extends ViewModel {
     private final Client client;
     public final LiveData<User> userLiveData;
 
-    private final MutableLiveData<List<User>> friendListMutableLiveData = new MutableLiveData<>();
-    private final MutableLiveData<List<Group>> groupListMutableLiveData = new MutableLiveData<>();
-
     public MainViewModel() {
         client = Client.getInstance();
         userLiveData = client.getUserLiveData();
     }
 
-    /*********************
-     * Request to server *
-     *********************/
+    public LiveData<String> responseMessageLiveData() {
+        return App.responseMessage;
+    }
+
+    /***************
+     * FRIEND LIST *
+     ***************/
+
+    private final MutableLiveData<List<User>> friendList = new MutableLiveData<>();
+
+    public void setFriendList(List<User> friendList) {
+        this.friendList.setValue(friendList);
+    }
+
+    public LiveData<List<User>> getFriendListLiveData() {
+        return friendList;
+    }
 
     public void listFriend() {
         client.sendMessage(RequestMessage.listFriend());
     }
 
-    public void listActiveFriend() {
-        client.sendMessage(RequestMessage.listActiveFriend());
+    /*********************
+     * JOINED GROUP LIST *
+     *********************/
+
+    private final MutableLiveData<List<Group>> joinedGroupList = new MutableLiveData<>();
+
+    public void setJoinedGroupList(List<Group> groupList) {
+        joinedGroupList.setValue(groupList);
     }
 
-    public void listFriendRequest() {
-        client.sendMessage(RequestMessage.listFriendRequest());
+    public LiveData<List<Group>> getJoinedGroupListLiveData() {
+        return joinedGroupList;
     }
 
-    public LiveData<String> getResponseMessageLiveData() {
-        return App.responseMessage;
+    public void listJoinedGroup() {
+        client.sendMessage(RequestMessage.listJoinedGroup());
     }
 
-    /**********************************************************************************************/
-
-    public void setFriendList(List<User> friendList) {
-        friendListMutableLiveData.setValue(friendList);
+    public void createGroup(Group group) {
+        client.sendMessage(RequestMessage.createGroup(group));
     }
-
-    public LiveData<List<User>> getFriendListLiveData() {
-        return friendListMutableLiveData;
-    }
-
-    public void setGroupList(List<Group> groupList) {
-        groupListMutableLiveData.setValue(groupList);
-    }
-
-    public LiveData<List<Group>> getGroupListLiveData() {
-        return groupListMutableLiveData;
-    }
-
-
 }

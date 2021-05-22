@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatClient">
-        <activity android:name=".ui.search.SearchActivity"></activity>
+        <activity android:name=".ui.chat.GroupChatActivity"></activity>
+        <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.chat.PrivateChatActivity" />
         <activity android:name=".ui.user.UserInfoActivity" />
         <activity

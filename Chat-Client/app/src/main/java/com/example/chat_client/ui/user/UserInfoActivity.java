@@ -75,7 +75,7 @@ public class UserInfoActivity extends AppCompatActivity {
 
         if (!user.getUsername().equals(username) || !user.getPassword().equals(password)) {
             updatedUser = new User(username, password);
-            if (!updatedUser.isUsernameValid()) {
+            if (!updatedUser.isNameValid()) {
                 Snackbar.make(binding.getRoot(), Constants.USERNAME_INVALID, Snackbar.LENGTH_SHORT).show();
             } else if (!updatedUser.isPasswordValid()) {
                 Snackbar.make(binding.getRoot(), Constants.PASSWORD_INVALID, Snackbar.LENGTH_SHORT).show();

@@ -57,7 +57,7 @@ public class FriendFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         // Observe response from server
-        viewModel.getResponseMessageLiveData().observe(requireActivity(), this::handleServerResponse);
+        viewModel.responseMessageLiveData().observe(requireActivity(), this::handleServerResponse);
 
         // Observe friend list
         viewModel.getFriendListLiveData().observe(requireActivity(), friends -> {
@@ -93,8 +93,8 @@ public class FriendFragment extends Fragment {
     }
 
     private void initFriendList() {
-        UserAdapter userAdapter = new UserAdapter(getActivity(), friends,
-                user -> mainActivityUtils.goToPrivateChatActivity(user)
+        UserAdapter userAdapter = new UserAdapter(getActivity(), friends, user ->
+                mainActivityUtils.goToPrivateChatActivity(user)
         );
         binding.lvFriends.setAdapter(userAdapter);
     }

@@ -2,23 +2,27 @@ package com.example.chat_client.dialogs;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.chat_client.R;
 import com.example.chat_client.databinding.DialogCreateBinding;
+import com.example.chat_client.models.Object;
+import com.example.chat_client.utils.Constants;
 
 import java.util.Objects;
 
-public class DialogCreate {
+public class DialogCreateObject {
 
     private DialogCreateBinding binding;
     private AlertDialog dialog;
     private final Context context;
-    private ButtonListener listener;
+    private final DialogButtonListener listener;
 
-    public DialogCreate(Context context, String title, String content) {
+    public DialogCreateObject(Context context, String title, String content, DialogButtonListener listener) {
         this.context = context;
+        this.listener = listener;
         buildDialog();
         setTextView(title, content);
         clickButtonNegative();
@@ -51,25 +55,18 @@ public class DialogCreate {
     private void clickButtonPositive() {
         binding.btnPositive.setOnClickListener(v -> {
             String name = Objects.requireNonNull(binding.etName.getText()).toString();
-            listener.onPositiveClicked(name);
+            Object object = new Object(name);
+            if (object.isNameValid()) {
+                dialog.dismiss();
+                listener.onPositiveClicked(object);
+            } else {
+                Toast.makeText(context, Constants.NAME_INVALID, Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     public void show() {
         dialog.show();
-    }
-
-    public void dismiss() {
-        dialog.dismiss();
-    }
-
-    public void setButtonListener(ButtonListener listener) {
-        this.listener = listener;
-    }
-
-    public interface ButtonListener {
-        void onNegativeClicked();
-        void onPositiveClicked(String name);
     }
 
 }

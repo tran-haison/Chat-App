@@ -4,18 +4,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.R;
 import com.example.chat_client.adapters.GroupAdapter;
 import com.example.chat_client.databinding.FragmentGroupBinding;
-import com.example.chat_client.dialogs.DialogCreate;
+import com.example.chat_client.dialogs.DialogButtonListener;
+import com.example.chat_client.dialogs.DialogUtils;
 import com.example.chat_client.models.Group;
+import com.example.chat_client.models.Object;
 import com.example.chat_client.ui.main.MainActivityUtils;
 import com.example.chat_client.ui.main.MainViewModel;
 import com.example.chat_client.utils.Constants;
@@ -57,7 +57,17 @@ public class GroupFragment extends Fragment {
 
         // View events
         binding.cvSearch.setOnClickListener(v -> mainActivityUtils.goToSearchActivity(Constants.SEARCH_GROUP));
-        binding.fabCreateGroup.setOnClickListener(v -> showCreateGroupDialog());
+        binding.fabCreateGroup.setOnClickListener(v -> DialogUtils.dialogCreateGroup(requireActivity(), new DialogButtonListener() {
+            @Override
+            public void onNegativeClicked() {
+            }
+
+            @Override
+            public void onPositiveClicked(Object object) {
+                Group group = new Group(object.getName());
+                viewModel.createGroup(group);
+            }
+        }));
     }
 
     private void setupViewModel() {
@@ -114,28 +124,4 @@ public class GroupFragment extends Fragment {
         binding.lvGroups.setAdapter(adapter);
     }
 
-    private void showCreateGroupDialog() {
-        DialogCreate dialog = new DialogCreate(
-                getActivity(),
-                requireActivity().getResources().getString(R.string.create_group),
-                requireActivity().getResources().getString(R.string.enter_group_name)
-        );
-        dialog.setButtonListener(new DialogCreate.ButtonListener() {
-            @Override
-            public void onNegativeClicked() {
-            }
-
-            @Override
-            public void onPositiveClicked(String name) {
-                Group group = new Group(name);
-                if (!group.isNameValid()) {
-                    Toast.makeText(getActivity(), Constants.GROUP_NAME_INVALID, Toast.LENGTH_SHORT).show();
-                } else {
-                    dialog.dismiss();
-                    viewModel.createGroup(group);
-                }
-            }
-        });
-        dialog.show();
-    }
 }

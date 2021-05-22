@@ -1,21 +1,18 @@
 package com.example.chat_client.models;
 
 import java.io.Serializable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class User implements Serializable, Validator {
+public class User extends Object implements Serializable {
 
-    private final String username;
     private final String password;
 
-    public User(String username, String password) {
-        this.username = username;
+    public User(String name, String password) {
+        super(name);
         this.password = password;
     }
 
     public String getUsername() {
-        return username;
+        return getName();
     }
 
     public String getPassword() {
@@ -23,27 +20,11 @@ public class User implements Serializable, Validator {
     }
 
     @Override
-    public boolean isNameValid() {
-        // Username can only contain a-z characters, number and underscore
-        String regex = "^[A-Za-z]\\w{0,29}$";
-        Pattern pattern = Pattern.compile(regex);
-
-        if (username == null || username.isEmpty() || username.length() > 15) {
-            return false;
-        }
-
-        Matcher matcher = pattern.matcher(username);
-        return matcher.matches();
+    public String toString() {
+        return name + " " + password;
     }
 
     public boolean isPasswordValid() {
-        // Password can contain any character except space
-        return password != null && !password.isEmpty() && !password.contains(" ");
+        return validator.isPasswordValid(password);
     }
-
-    @Override
-    public String toString() {
-        return username + " " + password;
-    }
-
 }

@@ -32,7 +32,6 @@ public class NetworkFragment extends Fragment {
 
         // Create ViewPager adapter
         setupViewPager();
-
     }
 
     private void setupViewPager() {
@@ -40,10 +39,9 @@ public class NetworkFragment extends Fragment {
                 requireActivity().getSupportFragmentManager(),
                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
         );
-        pagerAdapter.populateFragment(new NetworkUserFragment(), "User");
-        pagerAdapter.populateFragment(new NetworkGroupFragment(), "User");
+        pagerAdapter.populateFragment(new NetworkUserFragment(), "Users");
+        pagerAdapter.populateFragment(new NetworkGroupFragment(), "Groups");
         binding.vpContainer.setAdapter(pagerAdapter);
         binding.tlNetwork.setupWithViewPager(binding.vpContainer);
-
     }
 }

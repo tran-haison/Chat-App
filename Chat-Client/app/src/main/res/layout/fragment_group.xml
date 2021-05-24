@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/padding_horizontal"
-            android:fontFamily="@font/poppins_light"
+            android:fontFamily="@font/quicksand"
             android:padding="@dimen/margin_vertical"
             android:text="@string/search_group"
             app:drawableStartCompat="@drawable/ic_round_search_24"

@@ -23,6 +23,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static com.example.chat_client.socket.ResponseMessage.FAIL_ACCEPT_FRIEND;
+import static com.example.chat_client.socket.ResponseMessage.FAIL_DENY_REQUEST;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_ACCEPT_FRIEND;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_DENY_REQUEST;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_LIST_FRIEND_REQUEST;
@@ -72,8 +74,14 @@ public class FriendRequestFragment extends Fragment {
                     viewModel.listFriendRequest();
                     break;
                 case SUCCESS_DENY_REQUEST:
-                    Snackbar.make(binding.getRoot(), SUCCESS_DENY_REQUEST, Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), SUCCESS_DENY_REQUEST, Toast.LENGTH_LONG).show();
                     viewModel.listFriendRequest();
+                    break;
+                case FAIL_ACCEPT_FRIEND:
+                    Snackbar.make(binding.getRoot(), FAIL_ACCEPT_FRIEND, Snackbar.LENGTH_LONG).show();
+                    break;
+                case FAIL_DENY_REQUEST:
+                    Snackbar.make(binding.getRoot(), FAIL_DENY_REQUEST, Snackbar.LENGTH_LONG).show();
                     break;
             }
         } catch (Exception e) {

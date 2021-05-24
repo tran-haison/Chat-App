@@ -30,8 +30,8 @@ public class MessageUtil {
         List<String> tokens = splitMessage(message);
 
         for (int i = 0; i < tokens.size(); i++) {
-            User user = new User(tokens.get(i), "");
-            objects.add(user);
+            Object object = new Object(tokens.get(i));
+            objects.add(object);
         }
 
         return objects;

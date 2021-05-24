@@ -1,6 +1,7 @@
 package com.example.chat_client.ui.main.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +55,7 @@ public class NetworkUserFragment extends Fragment {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Observe response from server
         viewModel.responseMessageLiveData().observe(requireActivity(), this::handleServerResponse);

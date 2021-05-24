@@ -23,7 +23,7 @@
             android:background="@null"
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/colorBlue2"
-            app:tabMode="auto"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/colorBlue2"
             app:tabTextAppearance="@style/TabTextAppearance"
             app:tabTextColor="@color/colorGray" />

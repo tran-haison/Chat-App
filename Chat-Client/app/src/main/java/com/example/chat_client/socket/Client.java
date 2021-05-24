@@ -74,7 +74,6 @@ public class Client {
                 String message = new String(buffer).substring(0, charsRead);
                 Log.d(TAG, "Server response: " + message);
                 handler.post(() -> responseMessage.setValue(message));
-                Thread.sleep(1000);
             } catch (Exception e) {
                 Log.d(TAG, "Error: " + e.getMessage());
                 break;

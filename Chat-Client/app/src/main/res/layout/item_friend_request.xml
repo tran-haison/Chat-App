@@ -12,7 +12,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/margin_horizontal"
         android:contentDescription="@string/username"
         android:src="@drawable/img_user1" />
 
@@ -21,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@id/ibAccept"
+        android:layout_marginHorizontal="@dimen/padding_horizontal"
+        android:layout_toStartOf="@id/cvAccept"
         android:layout_toEndOf="@id/ivAva"
         android:fontFamily="@font/quicksand_medium"
         android:includeFontPadding="false"
@@ -29,26 +29,49 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_title" />
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/ibAccept"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAccept"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@id/ibDeny"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/accept"
-        android:src="@drawable/ic_round_check_24"
-        app:tint="@color/colorBlue2" />
+        android:layout_marginEnd="@dimen/padding_vertical"
+        android:layout_toStartOf="@id/cvDeny"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/ibDeny"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:contentDescription="@string/accept"
+            android:src="@drawable/ic_round_check_24"
+            app:tint="@color/colorBlue2" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvDeny"
+        android:layout_width="34dp"
+        android:layout_height="34dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/deny"
-        android:src="@drawable/ic_round_clear_24"
-        app:tint="@color/colorRed1" />
+        android:foreground="?attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/colorLightGray"
+        app:cardCornerRadius="@dimen/card_radius"
+        app:cardElevation="0dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@null"
+            android:contentDescription="@string/deny"
+            android:src="@drawable/ic_round_clear_24"
+            app:tint="@color/colorRed1" />
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

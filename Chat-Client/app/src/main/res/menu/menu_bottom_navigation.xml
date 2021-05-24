@@ -3,22 +3,22 @@
 
     <item
         android:id="@+id/friendFragment"
-        android:icon="@drawable/ic_friends"
+        android:icon="@drawable/selector_bottom_nav_friend"
         android:title="@string/friend" />
 
     <item
         android:id="@+id/groupFragment"
-        android:icon="@drawable/ic_group"
+        android:icon="@drawable/selector_bottom_nav_group"
         android:title="@string/group" />
 
     <item
         android:id="@+id/friendRequestFragment"
-        android:icon="@drawable/ic_friend_request"
+        android:icon="@drawable/selector_bottom_nav_friend_request"
         android:title="@string/request" />
 
     <item
         android:id="@+id/networkFragment"
-        android:icon="@drawable/ic_networking"
+        android:icon="@drawable/selector_bottom_nav_network"
         android:title="@string/network" />
 
 </menu>

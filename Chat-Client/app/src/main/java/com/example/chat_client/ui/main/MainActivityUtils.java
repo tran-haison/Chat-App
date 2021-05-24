@@ -19,9 +19,9 @@ public class MainActivityUtils {
         this.context = context;
     }
 
-    public void goToPrivateChatActivity(User friend) {
+    public void goToPrivateChatActivity(User user) {
         Bundle bundle = new Bundle();
-        bundle.putSerializable(Constants.FRIEND, friend);
+        bundle.putSerializable(Constants.FRIEND, user);
         Intent intent = new Intent(context, PrivateChatActivity.class);
         intent.putExtra(Constants.BUNDLE, bundle);
         context.startActivity(intent);

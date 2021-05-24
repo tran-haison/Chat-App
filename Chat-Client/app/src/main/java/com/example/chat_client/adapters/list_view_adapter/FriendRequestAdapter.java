@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.bumptech.glide.Glide;
-import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.databinding.ItemFriendRequestBinding;
 import com.example.chat_client.models.Object;
 
@@ -67,8 +66,8 @@ public class FriendRequestAdapter extends BaseAdapter {
         Glide.with(context).load(avatars.get(index)).into(viewHolder.binding.ivAva);
 
         // View events
-        viewHolder.binding.ibAccept.setOnClickListener(v -> requestListener.onAccept(object));
-        viewHolder.binding.ibDeny.setOnClickListener(v -> requestListener.onDeny(object));
+        viewHolder.binding.cvAccept.setOnClickListener(v -> requestListener.onAccept(object));
+        viewHolder.binding.cvDeny.setOnClickListener(v -> requestListener.onDeny(object));
 
         return convertView;
     }
@@ -79,6 +78,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 
     public interface FriendRequestListener {
         void onAccept(Object object);
+
         void onDeny(Object object);
     }
 }

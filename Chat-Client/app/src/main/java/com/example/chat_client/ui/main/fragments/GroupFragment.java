@@ -60,7 +60,8 @@ public class GroupFragment extends Fragment {
         binding.cvSearch.setOnClickListener(v -> mainActivityUtils.goToSearchActivity(Constants.SEARCH_GROUP));
         binding.fabCreateGroup.setOnClickListener(v -> DialogUtils.dialogCreateObject(requireActivity(), new DialogButtonListener() {
             @Override
-            public void onNegativeClicked() {}
+            public void onNegativeClicked() {
+            }
 
             @Override
             public void onPositiveClicked(Object object) {
@@ -71,7 +72,7 @@ public class GroupFragment extends Fragment {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         // Observe response from server
         viewModel.responseMessageLiveData().observe(requireActivity(), this::handleServerResponse);

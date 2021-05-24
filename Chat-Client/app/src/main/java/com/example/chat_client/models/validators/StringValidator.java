@@ -1,5 +1,7 @@
 package com.example.chat_client.models.validators;
 
-public interface StringValidator {
+import java.io.Serializable;
+
+public interface StringValidator extends Serializable {
     boolean isValid(String value);
 }

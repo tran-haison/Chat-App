@@ -26,7 +26,7 @@
                 android:id="@+id/ibBack"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:background="@null"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_arrow_back"
                 android:tint="@color/white" />

@@ -72,10 +72,11 @@ public class Client {
             try {
                 charsRead = input.read(buffer);
                 String message = new String(buffer).substring(0, charsRead);
-                Log.d(TAG, "Server response: " + message);
+                Log.d(TAG, ">>>>>>>>>> Server response: " + message);
                 handler.post(() -> responseMessage.setValue(message));
             } catch (Exception e) {
                 Log.d(TAG, "Error: " + e.getMessage());
+                closeSocket();
                 break;
             }
         }

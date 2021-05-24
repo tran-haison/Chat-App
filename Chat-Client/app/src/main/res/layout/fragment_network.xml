@@ -19,12 +19,13 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tlNetwork"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
+            android:layout_height="40dp"
+            android:background="@color/colorLightGray"
+            app:tabBackground="@drawable/background_tab_layout"
             app:tabGravity="fill"
-            app:tabIndicatorColor="@color/colorBlue2"
+            app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/colorBlue2"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/TabTextAppearance"
             app:tabTextColor="@color/colorGray" />
 

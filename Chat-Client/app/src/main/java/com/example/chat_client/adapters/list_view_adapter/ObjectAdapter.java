@@ -18,13 +18,13 @@ public class ObjectAdapter extends BaseAdapter {
     private final Context context;
     private final List<Object> objects;
     private final List<Integer> avatars;
-    private final ItemListener<Object> itemListener;
+    private final ItemListener itemListener;
 
     public ObjectAdapter(
             Context context,
             List<Object> objects,
             List<Integer> avatars,
-            ItemListener<Object> itemListener
+            ItemListener itemListener
     ) {
         this.context = context;
         this.objects = objects;
@@ -81,8 +81,8 @@ public class ObjectAdapter extends BaseAdapter {
         ItemObjectBinding binding;
     }
 
-    public interface ItemListener<T> {
-        void onItemClicked(T t);
+    public interface ItemListener {
+        void onItemClicked(Object object);
     }
 
 }

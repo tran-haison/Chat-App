@@ -2,27 +2,36 @@ package com.example.chat_client.dialogs;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
 import com.example.chat_client.R;
-import com.example.chat_client.databinding.DialogCreateObjectBinding;
+import com.example.chat_client.databinding.DialogCustomBinding;
 import com.example.chat_client.models.Object;
-import com.example.chat_client.utils.Constants;
 
-import java.util.Objects;
+public class DialogCustom {
 
-public class DialogCreateObject {
-
-    private DialogCreateObjectBinding binding;
+    private DialogCustomBinding binding;
     private AlertDialog dialog;
+    private final Object object;
     private final Context context;
     private final DialogButtonListener listener;
 
-    public DialogCreateObject(Context context, String title, String content, DialogButtonListener listener) {
+    public DialogCustom(Context context, String title, String content, DialogButtonListener listener) {
         this.context = context;
         this.listener = listener;
+        this.object = null;
+        init(title, content);
+    }
+
+    public DialogCustom(Context context, Object object, String title, String content, DialogButtonListener listener) {
+        this.context = context;
+        this.listener = listener;
+        this.object = object;
+        init(title, content);
+    }
+
+    private void init(String title, String content) {
         buildDialog();
         setTextView(title, content);
         clickButtonNegative();
@@ -30,7 +39,7 @@ public class DialogCreateObject {
     }
 
     private void buildDialog() {
-        binding = DialogCreateObjectBinding.inflate(LayoutInflater.from(context));
+        binding = DialogCustomBinding.inflate(LayoutInflater.from(context));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomDialog);
         builder.setView(binding.getRoot());
@@ -54,19 +63,12 @@ public class DialogCreateObject {
 
     private void clickButtonPositive() {
         binding.btnPositive.setOnClickListener(v -> {
-            String name = Objects.requireNonNull(binding.etName.getText()).toString();
-            Object object = new Object(name);
-            if (object.isNameValid()) {
-                dialog.dismiss();
-                listener.onPositiveClicked(object);
-            } else {
-                Toast.makeText(context, Constants.NAME_INVALID, Toast.LENGTH_SHORT).show();
-            }
+            dialog.dismiss();
+            listener.onPositiveClicked(object);
         });
     }
 
     public void show() {
         dialog.show();
     }
-
 }

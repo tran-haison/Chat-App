@@ -17,19 +17,24 @@
         app:cardElevation="0dp">
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tlNetwork"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tlNetwork"/>
+            android:background="@null"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorBlue2"
+            app:tabMode="auto"
+            app:tabSelectedTextColor="@color/colorBlue2"
+            app:tabTextAppearance="@style/TabTextAppearance"
+            app:tabTextColor="@color/colorGray" />
 
     </androidx.cardview.widget.CardView>
 
-    <ListView
-        android:id="@+id/lvNetwork"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/cvNetworkTab"
-        android:clipToPadding="false"
-        android:divider="@color/white"
-        android:dividerHeight="0dp" />
+        android:background="@color/white" />
 
 </RelativeLayout>

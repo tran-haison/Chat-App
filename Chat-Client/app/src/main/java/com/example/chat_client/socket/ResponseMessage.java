@@ -57,7 +57,7 @@ public class ResponseMessage {
     public static final String SUCCESS_ADD_FRIEND = "SUCCESS ADD_FRIEND";
     public static final String SUCCESS_REQUEST_FROM = "SUCCESS REQUEST_FROM";
     public static final String SUCCESS_ACCEPT_FRIEND = "SUCCESS ACCEPT_FRIEND";
-    public static final String SUCCESS_ACCEPT_TO = "SUCCESS ACCEPT_TO";
+    public static final String SUCCESS_ACCEPT_FROM = "SUCCESS ACCEPT_FROM";
     public static final String SUCCESS_DENY_REQUEST = "SUCCESS DENY_REQUEST";
     public static final String FAIL_ADD_FRIEND = "FAIL ADD_FRIEND";
     public static final String FAIL_ACCEPT_FRIEND = "FAIL ACCEPT_FRIEND";

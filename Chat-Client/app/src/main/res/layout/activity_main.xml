@@ -53,7 +53,7 @@
                     android:layout_marginStart="@dimen/padding_horizontal"
                     android:fontFamily="@font/poppins"
                     android:includeFontPadding="false"
-                    android:text="@{viewModel.userLiveData.username}"
+                    android:text="@{viewModel.userLiveData.name}"
                     android:textColor="@color/colorLightBlack" />
             </LinearLayout>
 

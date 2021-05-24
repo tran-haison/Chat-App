@@ -73,7 +73,7 @@ public class UserInfoActivity extends AppCompatActivity {
         String username = Objects.requireNonNull(binding.etUsername.getText()).toString();
         String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
 
-        if (!user.getUsername().equals(username) || !user.getPassword().equals(password)) {
+        if (!user.getName().equals(username) || !user.getPassword().equals(password)) {
             updatedUser = new User(username, password);
             if (!updatedUser.isNameValid()) {
                 Snackbar.make(binding.getRoot(), Constants.USERNAME_INVALID, Snackbar.LENGTH_SHORT).show();

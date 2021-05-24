@@ -32,4 +32,14 @@
     <string name="enter_name">Enter name</string>
     <string name="Continue">Continue</string>
     <string name="Cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="deny">Deny</string>
+    <string name="your_friend_request_will_be_shown_here">Your friend request will be shown here</string>
+    <string name="friend_request">Friend request</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seems_like_there_is_no_group_here">Seems like there is no group here...</string>
+    <string name="title">Title</string>
+    <string name="content">Content</string>
+    <string name="no_one_has_joined_this_network_yet">No one has joined this network yet :(</string>
 </resources>

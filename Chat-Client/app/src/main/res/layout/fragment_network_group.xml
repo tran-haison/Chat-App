@@ -3,41 +3,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.fragments.FriendRequestFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.main.fragments.NetworkGroupFragment">
 
     <ListView
-        android:id="@+id/lvFriendsRequest"
+        android:id="@+id/lvNetworkGroup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:divider="@color/white"
         android:dividerHeight="0dp"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <LinearLayout
-        android:id="@+id/llFriendRequestPrompt"
+        android:id="@+id/llGroupPrompt"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/margin_horizontal">
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavGroup"
+            android:layout_width="100dp"
+            android:layout_height="120dp"
             android:layout_marginBottom="@dimen/margin_vertical"
-            android:contentDescription="@string/friend_request"
-            android:src="@drawable/img_friend_request" />
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/animation_group" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_horizontal"
             android:fontFamily="@font/poppins"
-            android:text="@string/your_friend_request_will_be_shown_here"
+            android:text="@string/seems_like_there_is_no_group_here"
             android:textAlignment="center"
             android:textColor="@color/colorLightBlack" />
 
     </LinearLayout>
-
 </RelativeLayout>

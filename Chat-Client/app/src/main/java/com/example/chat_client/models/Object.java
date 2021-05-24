@@ -1,11 +1,12 @@
 package com.example.chat_client.models;
 
-import com.example.chat_client.models.validators.NameAndPasswordValidator;
+import com.example.chat_client.models.validators.NameValidator;
+import com.example.chat_client.models.validators.StringValidator;
 
 public class Object {
 
     protected String name;
-    protected final NameAndPasswordValidator validator = new NameAndPasswordValidator();
+    protected final StringValidator nameValidator = new NameValidator();
 
     public Object(String name) {
         this.name = name;
@@ -20,6 +21,6 @@ public class Object {
     }
 
     public boolean isNameValid() {
-        return validator.isNameValid(name);
+        return nameValidator.isValid(name);
     }
 }

@@ -45,8 +45,8 @@ public class RequestMessage {
         return "SEARCH_FRIEND " + query;
     }
 
-    public static String friendMessage(User friend, String message) {
-        return "FRIENDMSG " + friend.getUsername() + " " + message;
+    public static String friendMessage(User user, String message) {
+        return "FRIENDMSG " + user.getName() + " " + message;
     }
 
     /*********
@@ -101,15 +101,15 @@ public class RequestMessage {
         return "SEARCH_USER " + query;
     }
 
-    public static String addFriend(User friend) {
-        return "ADD_FRIEND " + friend.getUsername();
+    public static String addFriend(User user) {
+        return "ADD_FRIEND " + user.getName();
     }
 
-    public static String acceptFriend(User friend) {
-        return "ACCEPT_FRIEND " + friend.getUsername();
+    public static String acceptFriend(User user) {
+        return "ACCEPT_FRIEND " + user.getName();
     }
 
-    public static String denyRequest(User friend) {
-        return "DENY_REQUEST " + friend.getUsername();
+    public static String denyRequest(User user) {
+        return "DENY_REQUEST " + user.getName();
     }
 }

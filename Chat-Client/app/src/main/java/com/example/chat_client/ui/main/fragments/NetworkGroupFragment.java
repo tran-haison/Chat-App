@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,14 +13,12 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
-import com.example.chat_client.databinding.FragmentGroupBinding;
+import com.example.chat_client.databinding.FragmentNetworkGroupBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
 import com.example.chat_client.dialogs.DialogUtils;
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.Object;
-import com.example.chat_client.ui.main.MainActivityUtils;
 import com.example.chat_client.ui.main.MainViewModel;
-import com.example.chat_client.utils.Constants;
 import com.example.chat_client.utils.MessageUtil;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -27,22 +26,21 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static com.example.chat_client.socket.ResponseMessage.FAIL_GROUP_ALREADY_EXIST;
-import static com.example.chat_client.socket.ResponseMessage.SUCCESS_CREATE;
-import static com.example.chat_client.socket.ResponseMessage.SUCCESS_LIST_JOINED_GROUP;
+import static com.example.chat_client.socket.ResponseMessage.FAIL_JOIN;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_JOIN;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_LIST_NOT_JOINED_GROUP;
 
-public class GroupFragment extends Fragment {
+public class NetworkGroupFragment extends Fragment {
 
-    private MainActivityUtils mainActivityUtils;
+    private FragmentNetworkGroupBinding binding;
     private MainViewModel viewModel;
-    private FragmentGroupBinding binding;
     private List<Object> groups;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentGroupBinding.inflate(inflater, container, false);
+        binding = FragmentNetworkGroupBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -50,24 +48,8 @@ public class GroupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Init util
-        mainActivityUtils = new MainActivityUtils(getActivity());
-
-        // Setup view model
+        // Setup ViewModel
         setupViewModel();
-
-        // View events
-        binding.cvSearch.setOnClickListener(v -> mainActivityUtils.goToSearchActivity(Constants.SEARCH_GROUP));
-        binding.fabCreateGroup.setOnClickListener(v -> DialogUtils.dialogCreateObject(requireActivity(), new DialogButtonListener() {
-            @Override
-            public void onNegativeClicked() {}
-
-            @Override
-            public void onPositiveClicked(Object object) {
-                Group group = new Group(object.getName());
-                viewModel.createGroup(group);
-            }
-        }));
     }
 
     private void setupViewModel() {
@@ -76,25 +58,24 @@ public class GroupFragment extends Fragment {
         // Observe response from server
         viewModel.responseMessageLiveData().observe(requireActivity(), this::handleServerResponse);
 
-        // Request list of joined group
-        viewModel.listJoinedGroup();
+        // Request to server for list of all users
+        viewModel.listNotJoinedGroup();
     }
 
     private void handleServerResponse(String message) {
         try {
             String responseType = MessageUtil.responseType(message);
             switch (responseType) {
-                case SUCCESS_LIST_JOINED_GROUP:
-                    // Set list view of groups
+                case SUCCESS_LIST_NOT_JOINED_GROUP:
                     groups = MessageUtil.messageToObjects(message);
                     setViewVisibility();
                     break;
-                case SUCCESS_CREATE:
-                    // Update list of groups
-                    viewModel.listJoinedGroup();
+                case SUCCESS_JOIN:
+                    Toast.makeText(getActivity(), SUCCESS_JOIN, Toast.LENGTH_LONG).show();
+                    viewModel.listNotJoinedGroup();
                     break;
-                case FAIL_GROUP_ALREADY_EXIST:
-                    Snackbar.make(binding.getRoot(), FAIL_GROUP_ALREADY_EXIST, Snackbar.LENGTH_LONG).show();
+                case FAIL_JOIN:
+                    Snackbar.make(binding.getRoot(), FAIL_JOIN, Snackbar.LENGTH_LONG).show();
                     break;
             }
         } catch (Exception e) {
@@ -104,11 +85,11 @@ public class GroupFragment extends Fragment {
 
     private void setViewVisibility() {
         if (groups == null || groups.size() <= 0) {
-            binding.lvGroups.setVisibility(View.GONE);
+            binding.lvNetworkGroup.setVisibility(View.GONE);
             binding.llGroupPrompt.setVisibility(View.VISIBLE);
             binding.lavGroup.playAnimation();
         } else {
-            binding.lvGroups.setVisibility(View.VISIBLE);
+            binding.lvNetworkGroup.setVisibility(View.VISIBLE);
             binding.llGroupPrompt.setVisibility(View.GONE);
             initGroupListView();
         }
@@ -117,12 +98,26 @@ public class GroupFragment extends Fragment {
     private void initGroupListView() {
         ObjectAdapter adapter = new ObjectAdapter(
                 getActivity(), groups, AdapterUtils.groupAvatars(),
-                object -> {
-                    Group group = new Group(object.getName());
-                    mainActivityUtils.goToGroupChatActivity(group);
-                }
+                this::showDialogJoinGroup
         );
-        binding.lvGroups.setAdapter(adapter);
+        binding.lvNetworkGroup.setAdapter(adapter);
     }
 
+    private void showDialogJoinGroup(Object object) {
+        Group group = new Group(object.getName());
+        DialogUtils.dialogCustom(
+                getActivity(), group, "Do you want to join " + group.getName() + " ?",
+                new DialogButtonListener() {
+                    @Override
+                    public void onNegativeClicked() {
+                    }
+
+                    @Override
+                    public void onPositiveClicked(Object object) {
+                        if (object != null) {
+                            viewModel.joinGroup(group);
+                        }
+                    }
+                });
+    }
 }

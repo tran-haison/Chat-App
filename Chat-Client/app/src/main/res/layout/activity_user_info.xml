@@ -26,7 +26,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_centerVertical="true"
-                android:background="?attr/selectableItemBackground"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_arrow_back" />
 
@@ -48,7 +48,7 @@
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:background="?attr/selectableItemBackground"
+                android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/back"
                 android:src="@drawable/ic_sign_out" />
 
@@ -84,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_vertical"
                         android:fontFamily="@font/quicksand_medium"
-                        android:text="@{viewModel.userLiveData.username}"
+                        android:text="@{viewModel.userLiveData.name}"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_title" />
@@ -126,7 +126,7 @@
                             android:inputType="textPersonName"
                             android:paddingHorizontal="@dimen/margin_horizontal"
                             android:paddingVertical="@dimen/margin_vertical"
-                            android:text="@{viewModel.userLiveData.username}"
+                            android:text="@{viewModel.userLiveData.name}"
                             android:textColor="@color/colorLightBlack"
                             android:textSize="@dimen/text_detail"
                             tools:targetApi="m" />

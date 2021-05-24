@@ -10,8 +10,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.UserAdapter;
+import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
+import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
 import com.example.chat_client.databinding.FragmentFriendBinding;
+import com.example.chat_client.models.Object;
 import com.example.chat_client.models.User;
 import com.example.chat_client.ui.main.MainActivityUtils;
 import com.example.chat_client.ui.main.MainViewModel;
@@ -29,7 +31,7 @@ public class FriendFragment extends Fragment {
     private MainActivityUtils mainActivityUtils;
     private MainViewModel viewModel;
     private FragmentFriendBinding binding;
-    private List<User> friends;
+    private List<Object> friends;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -59,12 +61,6 @@ public class FriendFragment extends Fragment {
         // Observe response from server
         viewModel.responseMessageLiveData().observe(requireActivity(), this::handleServerResponse);
 
-        // Observe friend list
-        viewModel.getFriendListLiveData().observe(requireActivity(), friends -> {
-            this.friends = friends;
-            setViewVisibility();
-        });
-
         // Request list of friend
         viewModel.listFriend();
     }
@@ -73,7 +69,9 @@ public class FriendFragment extends Fragment {
         try {
             String responseType = MessageUtil.responseType(message);
             if (responseType.equals(SUCCESS_LIST_FRIEND)) {
-                viewModel.setFriendList(MessageUtil.messageToUser(message));
+                // Set list view of friends
+                friends = MessageUtil.messageToObjects(message);
+                setViewVisibility();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -88,14 +86,17 @@ public class FriendFragment extends Fragment {
         } else {
             binding.lvFriends.setVisibility(View.VISIBLE);
             binding.llFriendPrompt.setVisibility(View.GONE);
-            initFriendList();
+            initFriendListView();
         }
     }
 
-    private void initFriendList() {
-        UserAdapter userAdapter = new UserAdapter(getActivity(), friends, user ->
-                mainActivityUtils.goToPrivateChatActivity(user)
-        );
-        binding.lvFriends.setAdapter(userAdapter);
+    private void initFriendListView() {
+        ObjectAdapter objectAdapter = new ObjectAdapter(
+                getActivity(), friends, AdapterUtils.userAvatars(),
+                object -> {
+                    User user = new User(object.getName());
+                    mainActivityUtils.goToPrivateChatActivity(user);
+                });
+        binding.lvFriends.setAdapter(objectAdapter);
     }
 }

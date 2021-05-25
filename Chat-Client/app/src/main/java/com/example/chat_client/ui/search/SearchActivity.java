@@ -23,6 +23,7 @@ import com.example.chat_client.utils.MessageUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -164,7 +165,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void onSearchClicked() {
-        String query = binding.etSearch.getText().toString();
+        String query = Objects.requireNonNull(binding.etSearch.getText()).toString();
         if (query.isEmpty()) {
             Snackbar.make(binding.getRoot(), "Empty search field", Snackbar.LENGTH_SHORT).show();
         } else {
@@ -181,6 +182,4 @@ public class SearchActivity extends AppCompatActivity {
             Snackbar.make(binding.getRoot(), "Error searching!", Snackbar.LENGTH_SHORT).show();
         }
     }
-
-
 }

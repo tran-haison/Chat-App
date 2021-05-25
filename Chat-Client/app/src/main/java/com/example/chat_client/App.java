@@ -7,12 +7,15 @@ import android.os.Build;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.chat_client.models.User;
 import com.example.chat_client.socket.Client;
 
 public class App extends Application {
 
     public static final String CHANNEL_ID = "NOTIFICATION CHAT CHANNEL";
+
     public static LiveData<String> responseMessage;
+    public static LiveData<User> user;
 
     @Override
     public void onCreate() {
@@ -21,6 +24,7 @@ public class App extends Application {
         // Open socket
         Client client = Client.getInstance();
         responseMessage = client.responseMessageLiveData();
+        user = client.getUserLiveData();
 
         // Create notification channel
         createNotificationChannel();

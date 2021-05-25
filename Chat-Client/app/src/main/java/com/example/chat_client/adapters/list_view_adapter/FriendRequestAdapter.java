@@ -11,7 +11,6 @@ import com.example.chat_client.databinding.ItemFriendRequestBinding;
 import com.example.chat_client.models.Object;
 
 import java.util.List;
-import java.util.Random;
 
 public class FriendRequestAdapter extends BaseAdapter {
 
@@ -58,12 +57,7 @@ public class FriendRequestAdapter extends BaseAdapter {
 
         // Set value to view
         viewHolder.binding.tvName.setText(object.getName());
-
-        // Set random avatar to object
-        List<Integer> avatars = AdapterUtils.userAvatars();
-        Random random = new Random();
-        int index = random.nextInt(avatars.size());
-        Glide.with(context).load(avatars.get(index)).into(viewHolder.binding.ivAva);
+        Glide.with(context).load(object.getAvatar()).into(viewHolder.binding.ivAva);
 
         // View events
         viewHolder.binding.cvAccept.setOnClickListener(v -> requestListener.onAccept(object));
@@ -78,7 +72,6 @@ public class FriendRequestAdapter extends BaseAdapter {
 
     public interface FriendRequestListener {
         void onAccept(Object object);
-
         void onDeny(Object object);
     }
 }

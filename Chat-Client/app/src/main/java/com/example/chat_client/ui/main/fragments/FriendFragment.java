@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
 import com.example.chat_client.databinding.FragmentFriendBinding;
 import com.example.chat_client.models.Object;
@@ -31,7 +30,7 @@ public class FriendFragment extends Fragment {
     private MainActivityUtils mainActivityUtils;
     private MainViewModel viewModel;
     private FragmentFriendBinding binding;
-    private List<Object> friends;
+    private List<User> friends;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -70,7 +69,7 @@ public class FriendFragment extends Fragment {
             String responseType = MessageUtil.responseType(message);
             if (responseType.equals(SUCCESS_LIST_FRIEND)) {
                 // Set list view of friends
-                friends = MessageUtil.messageToObjects(message);
+                friends = MessageUtil.messageToUsers(message);
                 setViewVisibility();
             }
         } catch (Exception e) {
@@ -91,8 +90,9 @@ public class FriendFragment extends Fragment {
     }
 
     private void initFriendListView() {
+        List<? extends Object> objects = friends;
         ObjectAdapter objectAdapter = new ObjectAdapter(
-                getActivity(), friends, AdapterUtils.userAvatars(),
+                getActivity(), (List<Object>) objects,
                 object -> {
                     User user = new User(object.getName());
                     mainActivityUtils.goToPrivateChatActivity(user);

@@ -11,24 +11,20 @@ import com.example.chat_client.databinding.ItemObjectBinding;
 import com.example.chat_client.models.Object;
 
 import java.util.List;
-import java.util.Random;
 
 public class ObjectAdapter extends BaseAdapter {
 
     private final Context context;
     private final List<Object> objects;
-    private final List<Integer> avatars;
     private final ItemListener itemListener;
 
     public ObjectAdapter(
             Context context,
             List<Object> objects,
-            List<Integer> avatars,
             ItemListener itemListener
     ) {
         this.context = context;
         this.objects = objects;
-        this.avatars = avatars;
         this.itemListener = itemListener;
     }
 
@@ -65,11 +61,7 @@ public class ObjectAdapter extends BaseAdapter {
 
         // Set value to view
         viewHolder.binding.tvName.setText(object.getName());
-
-        // Set random avatar to object
-        Random random = new Random();
-        int index = random.nextInt(avatars.size());
-        Glide.with(context).load(avatars.get(index)).into(viewHolder.binding.ivAva);
+        Glide.with(context).load(object.getAvatar()).into(viewHolder.binding.ivAva);
 
         // View event
         viewHolder.binding.getRoot().setOnClickListener(v -> itemListener.onItemClicked(object));

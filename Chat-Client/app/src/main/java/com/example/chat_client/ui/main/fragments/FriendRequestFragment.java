@@ -33,7 +33,7 @@ public class FriendRequestFragment extends Fragment {
 
     private FragmentFriendRequestBinding binding;
     private MainViewModel viewModel;
-    private List<Object> friendRequests;
+    private List<User> friendRequests;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -66,7 +66,7 @@ public class FriendRequestFragment extends Fragment {
             String responseType = MessageUtil.responseType(message);
             switch (responseType) {
                 case SUCCESS_LIST_FRIEND_REQUEST:
-                    friendRequests = MessageUtil.messageToObjects(message);
+                    friendRequests = MessageUtil.messageToUsers(message);
                     setViewVisibility();
                     break;
                 case SUCCESS_ACCEPT_FRIEND:
@@ -101,7 +101,8 @@ public class FriendRequestFragment extends Fragment {
     }
 
     private void initFriendRequestListView() {
-        FriendRequestAdapter adapter = new FriendRequestAdapter(getActivity(), friendRequests,
+        List<? extends Object> objects = friendRequests;
+        FriendRequestAdapter adapter = new FriendRequestAdapter(getActivity(), (List<Object>) objects,
                 new FriendRequestAdapter.FriendRequestListener() {
                     @Override
                     public void onAccept(Object object) {

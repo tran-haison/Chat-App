@@ -1,7 +1,6 @@
 package com.example.chat_client.ui.main.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
 import com.example.chat_client.databinding.FragmentNetworkGroupBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
@@ -35,7 +33,7 @@ public class NetworkGroupFragment extends Fragment {
 
     private FragmentNetworkGroupBinding binding;
     private MainViewModel viewModel;
-    private List<Object> groups;
+    private List<Group> groups;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -68,7 +66,7 @@ public class NetworkGroupFragment extends Fragment {
             String responseType = MessageUtil.responseType(message);
             switch (responseType) {
                 case SUCCESS_LIST_NOT_JOINED_GROUP:
-                    groups = MessageUtil.messageToObjects(message);
+                    groups = MessageUtil.messageToGroups(message);
                     setViewVisibility();
                     break;
                 case SUCCESS_JOIN:
@@ -97,8 +95,9 @@ public class NetworkGroupFragment extends Fragment {
     }
 
     private void initGroupListView() {
+        List<? extends Object> objects = groups;
         ObjectAdapter adapter = new ObjectAdapter(
-                getActivity(), groups, AdapterUtils.groupAvatars(),
+                getActivity(), (List<Object>) objects,
                 this::showDialogJoinGroup
         );
         binding.lvNetworkGroup.setAdapter(adapter);

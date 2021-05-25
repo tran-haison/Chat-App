@@ -1,9 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.chat.GroupChatActivity">
+    tools:context=".ui.chat.PrivateChatActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/card_elevation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/ibBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back"
+                android:src="@drawable/ic_arrow_back" />
+
+            <ImageView
+                android:id="@+id/ivAva"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="@dimen/padding_horizontal"
+                android:layout_toEndOf="@id/ibBack"
+                android:contentDescription="@string/user_avatar"
+                android:src="@drawable/img_group1" />
+
+            <TextView
+                android:id="@+id/tvGroupName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/ibGroupInfo"
+                android:layout_toEndOf="@id/ivAva"
+                android:fontFamily="@font/quicksand_medium"
+                android:includeFontPadding="false"
+                android:text="@string/group"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_heading" />
+
+            <ImageButton
+                android:id="@+id/ibGroupInfo"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/group_info"
+                android:src="@drawable/ic_information" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/line1"
+        android:layout_below="@id/cvToolbar"
+        android:clipToPadding="false"
+        android:divider="@color/white"
+        android:dividerHeight="0dp" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/cvChatBox"
+        android:background="@color/colorLightGray" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvChatBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etChatMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/cvSendMessage"
+                android:background="@null"
+                android:drawableStart="@drawable/ic_message"
+                android:drawablePadding="@dimen/padding_horizontal"
+                android:drawableTint="@color/colorGray"
+                android:fontFamily="@font/poppins"
+                android:gravity="center_vertical"
+                android:hint="@string/type_a_message_here"
+                android:inputType="text"
+                android:padding="@dimen/margin_horizontal"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="@dimen/text_default"
+                tools:targetApi="m" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvSendMessage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="@dimen/margin_horizontal"
+                android:foreground="?attr/selectableItemBackground"
+                app:cardBackgroundColor="@color/colorBlue3"
+                app:cardCornerRadius="@dimen/card_radius"
+                app:cardElevation="@dimen/card_elevation">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/send_message"
+                    android:src="@drawable/ic_round_send_24"
+                    app:tint="@color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

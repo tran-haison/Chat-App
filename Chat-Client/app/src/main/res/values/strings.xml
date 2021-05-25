@@ -42,4 +42,10 @@
     <string name="title">Title</string>
     <string name="content">Content</string>
     <string name="no_one_has_joined_this_network_yet">No one has joined this network yet :(</string>
+    <string name="type_a_message_here">Type a message here</string>
+    <string name="send_message">Send message</string>
+    <string name="group_info">Group info</string>
+    <string name="june_10">June 10</string>
+    <string name="this_is_a_message">This is a Message</string>
+    <string name="_10_00">10:00</string>
 </resources>

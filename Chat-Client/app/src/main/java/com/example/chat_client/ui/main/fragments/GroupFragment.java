@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
 import com.example.chat_client.databinding.FragmentGroupBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
@@ -36,7 +35,7 @@ public class GroupFragment extends Fragment {
     private MainActivityUtils mainActivityUtils;
     private MainViewModel viewModel;
     private FragmentGroupBinding binding;
-    private List<Object> groups;
+    private List<Group> groups;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -87,7 +86,7 @@ public class GroupFragment extends Fragment {
             switch (responseType) {
                 case SUCCESS_LIST_JOINED_GROUP:
                     // Set list view of groups
-                    groups = MessageUtil.messageToObjects(message);
+                    groups = MessageUtil.messageToGroups(message);
                     setViewVisibility();
                     break;
                 case SUCCESS_CREATE:
@@ -116,8 +115,9 @@ public class GroupFragment extends Fragment {
     }
 
     private void initGroupListView() {
+        List<? extends Object> objects = groups;
         ObjectAdapter adapter = new ObjectAdapter(
-                getActivity(), groups, AdapterUtils.groupAvatars(),
+                getActivity(), (List<Object>) objects,
                 object -> {
                     Group group = new Group(object.getName());
                     mainActivityUtils.goToGroupChatActivity(group);

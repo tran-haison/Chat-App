@@ -10,7 +10,6 @@ import android.view.inputmethod.EditorInfo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
 import com.example.chat_client.databinding.ActivitySearchBinding;
 import com.example.chat_client.models.Group;
@@ -91,7 +90,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupViewModel() {
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
-
         // Observe response from server
         viewModel.responseMessageLiveData().observe(this, this::handleServerMessage);
     }
@@ -100,9 +98,16 @@ public class SearchActivity extends AppCompatActivity {
         try {
             String responseType = MessageUtil.responseType(message);
             switch (responseType) {
+
                 case SUCCESS_SEARCH_FRIEND:
+                    List<? extends Object> users = MessageUtil.messageToUsers(message);
+                    this.objects = (List<Object>) users;
+                    setViewVisibility();
+                    break;
+
                 case SUCCESS_SEARCH_JOINED_GROUP:
-                    objects = MessageUtil.messageToObjects(message);
+                    List<? extends Object> groups = MessageUtil.messageToGroups(message);
+                    this.objects = (List<Object>) groups;
                     setViewVisibility();
                     break;
             }
@@ -124,10 +129,7 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void initObjectListView() {
-        List<Integer> avatars = searchType.equals(Constants.SEARCH_GROUP)
-                ? AdapterUtils.groupAvatars()
-                : AdapterUtils.userAvatars();
-        ObjectAdapter adapter = new ObjectAdapter(this, objects, avatars, this::goToChatActivity);
+        ObjectAdapter adapter = new ObjectAdapter(this, objects, this::goToChatActivity);
         binding.lvSearch.setAdapter(adapter);
     }
 

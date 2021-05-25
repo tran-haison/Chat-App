@@ -1,7 +1,6 @@
 package com.example.chat_client.ui.main.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.AdapterUtils;
 import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
 import com.example.chat_client.databinding.FragmentNetworkUserBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
@@ -28,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 import static com.example.chat_client.socket.ResponseMessage.FAIL_ADD_FRIEND;
-import static com.example.chat_client.socket.ResponseMessage.FAIL_JOIN;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_ADD_FRIEND;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_LIST_USER;
 
@@ -36,7 +33,7 @@ public class NetworkUserFragment extends Fragment {
 
     private FragmentNetworkUserBinding binding;
     private MainViewModel viewModel;
-    private List<Object> users;
+    private List<User> users;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -69,7 +66,7 @@ public class NetworkUserFragment extends Fragment {
             String responseType = MessageUtil.responseType(message);
             switch (responseType) {
                 case SUCCESS_LIST_USER:
-                    users = MessageUtil.messageToObjects(message);
+                    users = MessageUtil.messageToUsers(message);
                     setViewVisibility();
                     break;
                 case SUCCESS_ADD_FRIEND:
@@ -98,8 +95,9 @@ public class NetworkUserFragment extends Fragment {
     }
 
     private void initUserListView() {
+        List<? extends Object> objects = users;
         ObjectAdapter adapter = new ObjectAdapter(
-                getActivity(), users, AdapterUtils.userAvatars(),
+                getActivity(), (List<Object>) objects,
                 this::showDialogAddFriend
         );
         binding.lvNetworkUser.setAdapter(adapter);

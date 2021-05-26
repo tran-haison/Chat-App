@@ -2,6 +2,7 @@ package com.example.chat_client.ui.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,12 +14,11 @@ import com.example.chat_client.adapters.list_view_adapter.MessageAdapter;
 import com.example.chat_client.databinding.ActivityPrivateChatBinding;
 import com.example.chat_client.models.Message;
 import com.example.chat_client.models.User;
-import com.example.chat_client.utils.CalendarUtil;
 import com.example.chat_client.utils.Constants;
 import com.example.chat_client.utils.MessageUtil;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 import static com.example.chat_client.socket.ResponseMessage.FAIL_FRIENDMSG;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FRIENDMSG;
@@ -32,7 +32,7 @@ public class PrivateChatActivity extends AppCompatActivity {
     private User friend;
     private final User me = App.user.getValue();
 
-    private List<Message> messages = new ArrayList<>();
+    private MessageAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +41,13 @@ public class PrivateChatActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         // Get friend info
-        getIntentChatFriend();
+        getIntentFriendInfo();
 
         // Setup ViewModel
         setupViewModel();
 
         // View init
+        initMessageRecyclerView();
         Glide.with(this).load(friend.getAvatar()).into(binding.ivAva);
         binding.tvUsername.setText(friend.getName());
 
@@ -55,7 +56,7 @@ public class PrivateChatActivity extends AppCompatActivity {
         binding.cvSendMessage.setOnClickListener(v -> sendMessage());
     }
 
-    private void getIntentChatFriend() {
+    private void getIntentFriendInfo() {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra(Constants.BUNDLE);
         if (bundle != null) {
@@ -66,34 +67,21 @@ public class PrivateChatActivity extends AppCompatActivity {
     private void setupViewModel() {
         viewModel = new ViewModelProvider(this).get(ChatViewModel.class);
         viewModel.responseLiveData().observe(this, this::handleServerResponse);
-        viewModel.getMessageLiveData().observe(this, messages -> {
-            this.messages = messages;
-            initMessageRecyclerView();
-        });
     }
 
     private void handleServerResponse(String serverMessage) {
         try {
             String responseType = MessageUtil.responseType(serverMessage);
             switch (responseType) {
-
                 case SUCCESS_MESSAGE_FROM_FRIEND:
-                    // TODO: check for message from current friend first
-                    String messageFromFriend = MessageUtil.messageToChat(serverMessage);
-                    Message friendMessage = new Message(messageFromFriend, friend, CalendarUtil.getCurrentTime());
-                    messages.add(friendMessage);
-                    viewModel.setMessages(messages);
+                    onMessageReceived(serverMessage);
                     break;
-
                 case SUCCESS_FRIENDMSG:
-                    String messageToFriend = binding.etChatMessage.getText().toString();
-                    Message meMessage = new Message(messageToFriend, me, CalendarUtil.getCurrentTime());
-                    messages.add(meMessage);
-                    viewModel.setMessages(messages);
-                    binding.etChatMessage.setText("");
+                    onMessageSent();
                     break;
-
                 case FAIL_FRIENDMSG:
+                    Toast.makeText(this, FAIL_FRIENDMSG, Toast.LENGTH_LONG).show();
+                    binding.etChatMessage.setText("");
                     break;
             }
         } catch (Exception e) {
@@ -101,14 +89,35 @@ public class PrivateChatActivity extends AppCompatActivity {
         }
     }
 
+    private void onMessageReceived(String serverMessage) {
+        String senderName = MessageUtil.senderOfMessage(serverMessage);
+        if (senderName.equals(friend.getName())) {
+            String messageFromFriend = MessageUtil.messageToChat(serverMessage);
+            Message friendMessage = new Message(messageFromFriend, friend);
+            adapter.addMessage(friendMessage);
+        }
+    }
+
+    private void onMessageSent() {
+        String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
+        Message myMessage = new Message(messageFromMe, me);
+        adapter.addMessage(myMessage);
+        binding.etChatMessage.setText("");
+    }
+
     private void initMessageRecyclerView() {
-        MessageAdapter messageAdapter = new MessageAdapter(this, messages);
-        binding.rvChat.setLayoutManager(new LinearLayoutManager(this));
-        binding.rvChat.setAdapter(messageAdapter);
+        // Set reverse linear layout manager
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setStackFromEnd(true);
+        binding.rvChat.setLayoutManager(linearLayoutManager);
+
+        // Set adapter
+        adapter = new MessageAdapter(this, new ArrayList<>());
+        binding.rvChat.setAdapter(adapter);
     }
 
     private void sendMessage() {
-        String chat = binding.etChatMessage.getText().toString();
+        String chat = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
         if (!chat.isEmpty()) {
             viewModel.friendMessage(friend, chat);
         }

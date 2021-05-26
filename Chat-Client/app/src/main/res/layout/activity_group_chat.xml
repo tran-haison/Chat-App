@@ -71,7 +71,8 @@
         android:layout_below="@id/cvToolbar"
         android:clipToPadding="false"
         android:divider="@color/white"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"
+        android:paddingVertical="@dimen/padding_vertical" />
 
     <View
         android:id="@+id/line1"
@@ -118,7 +119,8 @@
                 android:layout_height="40dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="@dimen/margin_horizontal"
+                android:layout_marginHorizontal="@dimen/margin_horizontal"
+                android:layout_marginVertical="@dimen/margin_vertical"
                 android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/colorBlue3"
                 app:cardCornerRadius="@dimen/card_radius"

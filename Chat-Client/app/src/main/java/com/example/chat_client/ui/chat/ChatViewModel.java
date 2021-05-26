@@ -11,12 +11,12 @@ import com.example.chat_client.models.User;
 import com.example.chat_client.socket.Client;
 import com.example.chat_client.socket.RequestMessage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ChatViewModel extends ViewModel {
 
     private final Client client;
-    private final MutableLiveData<List<Message>> messagesLiveData = new MutableLiveData<>();
 
     public ChatViewModel() {
         client = Client.getInstance();
@@ -34,11 +34,4 @@ public class ChatViewModel extends ViewModel {
         return App.responseMessage;
     }
 
-    public void setMessages(List<Message> messages) {
-        messagesLiveData.setValue(messages);
-    }
-
-    public LiveData<List<Message>> getMessageLiveData() {
-        return messagesLiveData;
-    }
 }

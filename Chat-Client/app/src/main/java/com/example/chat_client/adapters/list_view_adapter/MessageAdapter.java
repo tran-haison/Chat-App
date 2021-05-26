@@ -29,6 +29,11 @@ public class MessageAdapter extends RecyclerView.Adapter {
         this.messages = messages;
     }
 
+    public void addMessage(Message message) {
+        messages.add(message);
+        notifyItemInserted(messages.size());
+    }
+
     @Override
     public long getItemId(int position) {
         return messages == null ? -1 : position;
@@ -44,6 +49,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
         Message message = messages.get(position);
         User currentUser = App.user.getValue();
 
+        assert currentUser != null;
         if (message.getObject().getName().equals(currentUser.getName())) {
             return VIEW_TYPE_MESSAGE_SENT;
         } else {
@@ -77,10 +83,10 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_MESSAGE_SENT:
-                ((MessageSentViewHolder) holder).bindData(message);
+                ((MessageSentViewHolder) holder).bind(message);
                 break;
             case VIEW_TYPE_MESSAGE_RECEIVED:
-                ((MessageReceivedViewHolder) holder).bindData(context, message);
+                ((MessageReceivedViewHolder) holder).bind(context, message);
                 break;
         }
     }
@@ -93,7 +99,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             this.receiveBinding = receiveBinding;
         }
 
-        void bindData(Context context, Message message) {
+        void bind(Context context, Message message) {
             receiveBinding.tvUsername.setText(message.getObject().getName());
             receiveBinding.tvMessageReceive.setText(message.getMessage());
             receiveBinding.tvTime.setText(message.getCreateAt());
@@ -109,7 +115,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             this.sendBinding = sendBinding;
         }
 
-        void bindData(Message message) {
+        void bind(Message message) {
             sendBinding.tvMessageSend.setText(message.getMessage());
             sendBinding.tvTime.setText(message.getCreateAt());
         }

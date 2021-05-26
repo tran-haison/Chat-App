@@ -19,6 +19,7 @@ import com.example.chat_client.ui.chat.GroupChatActivity;
 import com.example.chat_client.ui.chat.PrivateChatActivity;
 import com.example.chat_client.utils.Constants;
 import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.utils.ViewUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -51,6 +52,10 @@ public class SearchActivity extends AppCompatActivity {
 
         // Setup ViewModel
         setupViewModel();
+
+        // View implementation
+        binding.etSearch.requestFocus();
+        ViewUtil.openKeyboard(binding.etSearch, this);
 
         // View events
         binding.ibBack.setOnClickListener(v -> onBackPressed());
@@ -90,7 +95,6 @@ public class SearchActivity extends AppCompatActivity {
 
     private void setupViewModel() {
         viewModel = new ViewModelProvider(this).get(SearchViewModel.class);
-        // Observe response from server
         viewModel.responseMessageLiveData().observe(this, this::handleServerMessage);
     }
 

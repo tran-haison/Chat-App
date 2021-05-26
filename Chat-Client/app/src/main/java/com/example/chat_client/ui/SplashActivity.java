@@ -24,6 +24,6 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = new Intent(this, UserSignInActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
-        }, 5000);
+        }, 3000);
     }
 }

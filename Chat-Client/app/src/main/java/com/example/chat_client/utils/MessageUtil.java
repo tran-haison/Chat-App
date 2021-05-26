@@ -1,7 +1,6 @@
 package com.example.chat_client.utils;
 
 import com.example.chat_client.models.Group;
-import com.example.chat_client.models.Object;
 import com.example.chat_client.models.User;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ public class MessageUtil {
      * @return response type
      */
     public static String responseType(String message) {
-        String[] split = message.split("\\s+");
+        String[] split = message.split("\\s+", 3);
         return split[0] + " " + split[1];
     }
 
@@ -59,11 +58,13 @@ public class MessageUtil {
     }
 
     public static String messageToChat(String message) {
-        String[] split = message.split("\\s+");
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 3; i < split.length; i++) {
-            stringBuilder.append(split[i]).append(" ");
-        }
-        return stringBuilder.toString();
+        String[] split = message.split("\\s+", 4);
+        return split[3].trim();
     }
+
+    public static String senderOfMessage(String message) {
+        String[] split = message.split("\\s+", 4);
+        return split[2].trim();
+    }
+
 }

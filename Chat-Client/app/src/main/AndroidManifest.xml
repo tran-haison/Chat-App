@@ -13,10 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatClient">
-        <activity android:name=".ui.chat.GroupChatActivity"></activity>
-        <activity android:name=".ui.search.SearchActivity" />
-        <activity android:name=".ui.chat.PrivateChatActivity" />
-        <activity android:name=".ui.user.UserInfoActivity" />
+
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait">
@@ -26,6 +23,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.chat.GroupChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"/>
+        <activity
+            android:name=".ui.chat.PrivateChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.user.UserInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.user.UserSignUpActivity"
             android:screenOrientation="portrait" />

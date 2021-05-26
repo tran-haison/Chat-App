@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="@dimen/margin_horizontal"
-    android:paddingVertical="@dimen/margin_vertical">
+    android:paddingVertical="@dimen/padding_vertical">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvMessageSend"

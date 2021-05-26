@@ -15,7 +15,7 @@ public class UserViewModel extends ViewModel {
 
     public UserViewModel() {
         client = Client.getInstance();
-        userLiveData = client.getUserLiveData();
+        userLiveData = client.userLiveData();
     }
 
     public void setUser(User user) {
@@ -38,7 +38,7 @@ public class UserViewModel extends ViewModel {
         client.sendMessage(RequestMessage.updateUser(user));
     }
 
-    public LiveData<String> getResponseMessageLiveData() {
+    public LiveData<String> responseMessageLiveData() {
         return App.responseMessage;
     }
 

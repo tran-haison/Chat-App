@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/margin_horizontal"
+    android:paddingVertical="@dimen/padding_vertical">
+
+    <TextView
+        android:id="@+id/tvGroupJoinQuit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand_medium"
+        android:includeFontPadding="false"
+        android:text="@string/username"
+        android:textAlignment="center"
+        android:textColor="@color/colorIcon" />
+
+</RelativeLayout>

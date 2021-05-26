@@ -74,7 +74,7 @@ public class NetworkUserFragment extends Fragment {
                     viewModel.listUser();
                     break;
                 case FAIL_ADD_FRIEND:
-                    Snackbar.make(binding.getRoot(), FAIL_ADD_FRIEND, Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(binding.getRoot(), "FAIL ALREADY_ADD_FRIEND", Snackbar.LENGTH_LONG).show();
                     break;
             }
         } catch (Exception e) {
@@ -106,7 +106,9 @@ public class NetworkUserFragment extends Fragment {
     private void showDialogAddFriend(Object object) {
         User user = new User(object.getName());
         DialogUtils.dialogCustom(
-                getActivity(), user, "Do you want to add " + user.getName() + " as a new friend?",
+                getActivity(),
+                user,
+                "Do you want to add " + user.getName() + " as a new friend?",
                 new DialogButtonListener() {
                     @Override
                     public void onNegativeClicked() {

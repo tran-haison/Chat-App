@@ -106,7 +106,9 @@ public class NetworkGroupFragment extends Fragment {
     private void showDialogJoinGroup(Object object) {
         Group group = new Group(object.getName());
         DialogUtils.dialogCustom(
-                getActivity(), group, "Do you want to join " + group.getName() + " ?",
+                getActivity(),
+                group,
+                "Do you want to join " + group.getName() + " ?",
                 new DialogButtonListener() {
                     @Override
                     public void onNegativeClicked() {

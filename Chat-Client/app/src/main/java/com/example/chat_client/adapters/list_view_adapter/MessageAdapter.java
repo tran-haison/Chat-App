@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.chat_client.App;
+import com.example.chat_client.databinding.ItemGroupMemberChangeBinding;
 import com.example.chat_client.databinding.ItemMessageReceiveBinding;
 import com.example.chat_client.databinding.ItemMessageSendBinding;
 import com.example.chat_client.models.Message;
@@ -118,6 +119,19 @@ public class MessageAdapter extends RecyclerView.Adapter {
         void bind(Message message) {
             sendBinding.tvMessageSend.setText(message.getMessage());
             sendBinding.tvTime.setText(message.getCreateAt());
+        }
+    }
+
+    private static class GroupMemberChangeViewHolder extends RecyclerView.ViewHolder {
+        ItemGroupMemberChangeBinding memberChangeBinding;
+
+        public GroupMemberChangeViewHolder(@NonNull ItemGroupMemberChangeBinding memberChangeBinding) {
+            super(memberChangeBinding.getRoot());
+            this.memberChangeBinding = memberChangeBinding;
+        }
+
+        void bind(Message message) {
+            memberChangeBinding.tvGroupJoinQuit.setText(message.getObject().getName() + "");
         }
     }
 }

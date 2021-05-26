@@ -95,6 +95,7 @@ public class PrivateChatActivity extends AppCompatActivity {
             String messageFromFriend = MessageUtil.messageToChat(serverMessage);
             Message friendMessage = new Message(messageFromFriend, friend);
             adapter.addMessage(friendMessage);
+            binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
         }
     }
 
@@ -102,16 +103,12 @@ public class PrivateChatActivity extends AppCompatActivity {
         String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
         Message myMessage = new Message(messageFromMe, me);
         adapter.addMessage(myMessage);
+        binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
         binding.etChatMessage.setText("");
     }
 
     private void initMessageRecyclerView() {
-        // Set reverse linear layout manager
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
-        binding.rvChat.setLayoutManager(linearLayoutManager);
-
-        // Set adapter
+        binding.rvChat.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageAdapter(this, new ArrayList<>());
         binding.rvChat.setAdapter(adapter);
     }

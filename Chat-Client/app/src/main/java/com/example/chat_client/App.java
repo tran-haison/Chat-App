@@ -24,7 +24,7 @@ public class App extends Application {
         // Open socket
         Client client = Client.getInstance();
         responseMessage = client.responseMessageLiveData();
-        user = client.getUserLiveData();
+        user = client.userLiveData();
 
         // Create notification channel
         createNotificationChannel();

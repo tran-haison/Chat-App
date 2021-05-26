@@ -48,4 +48,7 @@
     <string name="june_10">June 10</string>
     <string name="this_is_a_message">This is a Message</string>
     <string name="_10_00">10:00</string>
+    <string name="members_of_group">Members of group</string>
+    <string name="group_avatar">Group avatar</string>
+    <string name="_10">10</string>
 </resources>

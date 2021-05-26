@@ -54,7 +54,6 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:paddingVertical="@dimen/padding_vertical"
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -62,7 +61,9 @@
         android:layout_below="@id/cvToolbar"
         android:clipToPadding="false"
         android:divider="@color/white"
-        android:dividerHeight="0dp" />
+        android:dividerHeight="0dp"
+        android:paddingVertical="@dimen/padding_vertical"
+        app:stackFromEnd="true" />
 
     <View
         android:id="@+id/line1"
@@ -110,7 +111,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"
-                android:layout_marginVertical="@dimen/margin_vertical"                android:foreground="?attr/selectableItemBackground"
+                android:layout_marginVertical="@dimen/margin_vertical"
+                android:foreground="?attr/selectableItemBackground"
                 app:cardBackgroundColor="@color/colorBlue3"
                 app:cardCornerRadius="@dimen/card_radius"
                 app:cardElevation="@dimen/card_elevation">

@@ -57,17 +57,18 @@ public class GroupFragment extends Fragment {
 
         // View events
         binding.cvSearch.setOnClickListener(v -> mainActivityUtils.goToSearchActivity(Constants.SEARCH_GROUP));
-        binding.fabCreateGroup.setOnClickListener(v -> DialogUtils.dialogCreateObject(requireActivity(), new DialogButtonListener() {
-            @Override
-            public void onNegativeClicked() {
-            }
+        binding.fabCreateGroup.setOnClickListener(v -> DialogUtils.dialogCreateObject(requireActivity(),
+                new DialogButtonListener() {
+                    @Override
+                    public void onNegativeClicked() {
+                    }
 
-            @Override
-            public void onPositiveClicked(Object object) {
-                Group group = new Group(object.getName());
-                viewModel.createGroup(group);
-            }
-        }));
+                    @Override
+                    public void onPositiveClicked(Object object) {
+                        Group group = new Group(object.getName());
+                        viewModel.createGroup(group);
+                    }
+                }));
     }
 
     private void setupViewModel() {

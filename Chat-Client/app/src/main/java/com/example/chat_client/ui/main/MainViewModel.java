@@ -16,7 +16,7 @@ public class MainViewModel extends ViewModel {
 
     public MainViewModel() {
         client = Client.getInstance();
-        userLiveData = client.getUserLiveData();
+        userLiveData = client.userLiveData();
     }
 
     public LiveData<String> responseMessageLiveData() {

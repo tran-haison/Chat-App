@@ -42,7 +42,7 @@ public class UserSignUpActivity extends AppCompatActivity {
 
     private void setupViewModel() {
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
-        viewModel.getResponseMessageLiveData().observe(this, message -> {
+        viewModel.responseMessageLiveData().observe(this, message -> {
             if (message.equals(FAIL_USERNAME_ALREADY_EXIST)) {
                 Snackbar.make(binding.getRoot(), FAIL_USERNAME_ALREADY_EXIST, Snackbar.LENGTH_SHORT).show();
             } else if (message.equals(SUCCESS_SIGN_UP)) {

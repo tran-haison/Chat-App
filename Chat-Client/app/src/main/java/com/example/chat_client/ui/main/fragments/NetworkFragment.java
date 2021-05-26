@@ -30,7 +30,7 @@ public class NetworkFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Create ViewPager adapter
+        // Setup ViewPager adapter
         setupViewPager();
     }
 

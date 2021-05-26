@@ -45,7 +45,7 @@ public class UserSignInActivity extends AppCompatActivity {
 
     private void setupViewModel() {
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
-        viewModel.getResponseMessageLiveData().observe(this, message -> {
+        viewModel.responseMessageLiveData().observe(this, message -> {
             switch (message) {
                 case FAIL_USER_ALREADY_SIGN_IN:
                     Snackbar.make(binding.getRoot(), FAIL_USER_ALREADY_SIGN_IN, Snackbar.LENGTH_SHORT).show();

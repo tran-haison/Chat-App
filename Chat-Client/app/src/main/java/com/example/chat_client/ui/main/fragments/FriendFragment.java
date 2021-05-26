@@ -28,7 +28,6 @@ import static com.example.chat_client.socket.ResponseMessage.SUCCESS_LIST_FRIEND
 public class FriendFragment extends Fragment {
 
     private MainActivityUtils mainActivityUtils;
-    private MainViewModel viewModel;
     private FragmentFriendBinding binding;
     private List<User> friends;
 
@@ -55,7 +54,7 @@ public class FriendFragment extends Fragment {
     }
 
     private void setupViewModel() {
-        viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        MainViewModel viewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
 
         // Observe response from server
         viewModel.responseMessageLiveData().observe(requireActivity(), this::handleServerResponse);

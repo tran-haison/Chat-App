@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginHorizontal="@dimen/margin_horizontal"
-            android:background="?attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:fontFamily="@font/poppins_medium"
             android:text="@string/sign_up"
             android:textColor="@color/colorBlue2" />

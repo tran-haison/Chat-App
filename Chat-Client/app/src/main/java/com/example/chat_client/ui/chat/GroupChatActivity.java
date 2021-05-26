@@ -15,6 +15,7 @@ import com.example.chat_client.databinding.ActivityGroupChatBinding;
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.Message;
 import com.example.chat_client.models.User;
+import com.example.chat_client.ui.group.GroupInfoActivity;
 import com.example.chat_client.utils.Constants;
 import com.example.chat_client.utils.MessageUtil;
 
@@ -54,7 +55,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
         // View events
         binding.ibBack.setOnClickListener(v -> onBackPressed());
-        binding.ibGroupInfo.setOnClickListener(v -> showGroupInfo());
+        binding.ibGroupInfo.setOnClickListener(v -> goToGroupInfoActivity());
         binding.cvSendMessage.setOnClickListener(v -> sendMessage());
     }
 
@@ -96,29 +97,29 @@ public class GroupChatActivity extends AppCompatActivity {
         String messageFromMember = MessageUtil.messageToChat(serverMessage);
         Message memberMessage = new Message(messageFromMember, member);
         adapter.addMessage(memberMessage);
+        binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
     }
 
     private void onMessageSent() {
         String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
         Message myMessage = new Message(messageFromMe, me);
         adapter.addMessage(myMessage);
+        binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
         binding.etChatMessage.setText("");
     }
 
     private void initMessageRecyclerView() {
-        // Set reverse linear layout manager
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
-        binding.rvChat.setLayoutManager(linearLayoutManager);
-
-        // Set adapter
+        binding.rvChat.setLayoutManager(new LinearLayoutManager(this));
         adapter = new MessageAdapter(this, new ArrayList<>());
         binding.rvChat.setAdapter(adapter);
     }
 
-    private void showGroupInfo() {
-        Toast.makeText(this, "Nothing", Toast.LENGTH_SHORT).show();
-        // TODO
+    private void goToGroupInfoActivity() {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(Constants.GROUP, group);
+        Intent intent = new Intent(this, GroupInfoActivity.class);
+        intent.putExtra(Constants.BUNDLE, bundle);
+        startActivity(intent);
     }
 
     private void sendMessage() {

@@ -111,7 +111,7 @@ public class Client {
         this.userMutableLiveData.setValue(user);
     }
 
-    public LiveData<User> getUserLiveData() {
+    public LiveData<User> userLiveData() {
         return userMutableLiveData;
     }
 

@@ -9,6 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.chat_client.databinding.ActivityUserInfoBinding;
+import com.example.chat_client.dialogs.DialogButtonListener;
+import com.example.chat_client.dialogs.DialogUtils;
+import com.example.chat_client.models.Object;
 import com.example.chat_client.models.User;
 import com.example.chat_client.utils.Constants;
 import com.google.android.material.snackbar.Snackbar;
@@ -41,15 +44,15 @@ public class UserInfoActivity extends AppCompatActivity {
 
         // View events
         binding.ibBack.setOnClickListener(v -> onBackPressed());
-        binding.ibSignOut.setOnClickListener(v -> viewModel.signOutUser());
-        binding.btnUpdateProfile.setOnClickListener(v -> updateUser());
+        binding.ibSignOut.setOnClickListener(v -> showDialogSignOut());
+        binding.btnUpdateProfile.setOnClickListener(v -> showDialogUpdate());
     }
 
     private void setupViewModel() {
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
 
         // Observe response from server
-        viewModel.getResponseMessageLiveData().observe(this, this::handleResponseMessage);
+        viewModel.responseMessageLiveData().observe(this, this::handleResponseMessage);
 
         viewModel.userLiveData.observe(this, user -> this.user = user);
     }
@@ -69,6 +72,46 @@ public class UserInfoActivity extends AppCompatActivity {
         }
     }
 
+    private void showDialogSignOut() {
+        DialogUtils.dialogCustom(
+                this,
+                user,
+                "Sign out now?",
+                new DialogButtonListener() {
+                    @Override
+                    public void onNegativeClicked() {}
+
+                    @Override
+                    public void onPositiveClicked(Object object) {
+                        viewModel.signOutUser();
+                    }
+                }
+        );
+    }
+
+    private void showDialogUpdate() {
+        DialogUtils.dialogCustom(
+                this,
+                user,
+                "Do you want to update your information?",
+                new DialogButtonListener() {
+                    @Override
+                    public void onNegativeClicked() {}
+
+                    @Override
+                    public void onPositiveClicked(Object object) {
+                        updateUser();
+                    }
+                }
+        );
+    }
+
+    private void saveUserInfo() {
+        if (updatedUser != null) {
+            viewModel.setUser(updatedUser);
+        }
+    }
+
     private void updateUser() {
         String username = Objects.requireNonNull(binding.etUsername.getText()).toString();
         String password = Objects.requireNonNull(binding.etPassword.getText()).toString();
@@ -84,12 +127,6 @@ public class UserInfoActivity extends AppCompatActivity {
             }
         } else {
             Snackbar.make(binding.getRoot(), "Username or password must be different!", Snackbar.LENGTH_SHORT).show();
-        }
-    }
-
-    private void saveUserInfo() {
-        if (updatedUser != null) {
-            viewModel.setUser(updatedUser);
         }
     }
 

@@ -185,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
         } else if (searchType.equals(Constants.SEARCH_GROUP)) {
             viewModel.searchJoinedGroup(query);
         } else {
-            Snackbar.make(binding.getRoot(), "Error searching!", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(binding.getRoot(), "Error searching!", Snackbar.LENGTH_LONG).show();
         }
     }
 }

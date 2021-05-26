@@ -72,7 +72,8 @@
         android:clipToPadding="false"
         android:divider="@color/white"
         android:dividerHeight="0dp"
-        android:paddingVertical="@dimen/padding_vertical" />
+        android:paddingVertical="@dimen/padding_vertical"
+        app:stackFromEnd="true" />
 
     <View
         android:id="@+id/line1"

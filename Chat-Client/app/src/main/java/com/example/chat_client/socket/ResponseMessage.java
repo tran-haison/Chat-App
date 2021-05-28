@@ -41,7 +41,7 @@ public class ResponseMessage {
     public static final String SUCCESS_SEARCH_NOT_JOINED_GROUP = "SUCCESS SEARCH_NOT_JOINED_GROUP";
     public static final String SUCCESS_LIST_ALL_MEMBER = "SUCCESS LIST_ALL_MEMBER";
     public static final String SUCCESS_GROUPMSG = "SUCCESS GROUPMSG";
-    public static final String SUCCESS_MESSAGE_FROM_MEMBER = "SUCCESS MESSEAGE_FROM_MEMBER";
+    public static final String SUCCESS_MESSAGE_FROM_MEMBER = "SUCCESS MESSAGE_FROM_MEMBER";
     public static final String FAIL_GROUP_ALREADY_EXIST = "FAIL GROUP_ALREADY_EXIST";
     public static final String FAIL_JOIN = "FAIL JOIN";
     public static final String FAIL_QUIT = "FAIL QUIT";

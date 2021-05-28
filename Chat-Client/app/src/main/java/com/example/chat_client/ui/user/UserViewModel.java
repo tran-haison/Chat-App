@@ -19,7 +19,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public void setUser(User user) {
-        client.setUser(user);
+        client.setUserLiveData(user);
     }
 
     public void signUpUser(User user) {

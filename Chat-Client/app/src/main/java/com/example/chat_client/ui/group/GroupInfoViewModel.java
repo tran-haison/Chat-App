@@ -16,10 +16,6 @@ public class GroupInfoViewModel extends ViewModel {
         client = Client.getInstance();
     }
 
-    public void listAllMembers(Group group) {
-        client.sendMessage(RequestMessage.listAllMember(group));
-    }
-
     public void quitGroup(Group group) {
         client.sendMessage(RequestMessage.quitGroup(group));
     }

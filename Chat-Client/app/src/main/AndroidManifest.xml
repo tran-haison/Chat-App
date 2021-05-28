@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -13,7 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatClient">
-        <activity android:name=".ui.group.GroupInfoActivity"></activity>
         <activity
             android:name=".ui.SplashActivity"
             android:screenOrientation="portrait">
@@ -23,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.group.GroupInfoActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.chat.GroupChatActivity"
             android:screenOrientation="portrait" />

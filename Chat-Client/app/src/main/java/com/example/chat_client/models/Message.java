@@ -4,13 +4,29 @@ import com.example.chat_client.utils.CalendarUtil;
 
 public class Message {
 
+    public enum MessageType {
+        SEND,
+        RECEIVE,
+        JOIN,
+        QUIT
+    }
+
     private String message;
     private Object object;
-    private String createAt;
+    private final String createAt;
+    private MessageType messageType;
 
-    public Message(String message, Object object) {
+    public Message(String message, Object object, MessageType messageType) {
         this.message = message;
         this.object = object;
+        this.messageType = messageType;
+        this.createAt = CalendarUtil.getCurrentTime();
+    }
+
+    public Message(Object object, MessageType messageType) {
+        this.message = "";
+        this.object = object;
+        this.messageType = messageType;
         this.createAt = CalendarUtil.getCurrentTime();
     }
 
@@ -34,7 +50,8 @@ public class Message {
         return createAt;
     }
 
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+    public MessageType getMessageType() {
+        return messageType;
     }
+
 }

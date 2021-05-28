@@ -4,6 +4,7 @@ public class Constants {
 
     public static final String FRIEND = "friend";
     public static final String GROUP = "group";
+    public static final String MEMBERS = "members";
     public static final String BUNDLE = "bundle";
     public static final String SEARCH_TYPE = "search type";
     public static final String SEARCH_USER = "search user";

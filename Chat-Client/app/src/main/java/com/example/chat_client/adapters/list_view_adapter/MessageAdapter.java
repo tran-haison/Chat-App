@@ -8,12 +8,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.chat_client.App;
 import com.example.chat_client.databinding.ItemGroupMemberChangeBinding;
 import com.example.chat_client.databinding.ItemMessageReceiveBinding;
 import com.example.chat_client.databinding.ItemMessageSendBinding;
 import com.example.chat_client.models.Message;
-import com.example.chat_client.models.User;
 
 import java.util.List;
 
@@ -22,8 +20,10 @@ public class MessageAdapter extends RecyclerView.Adapter {
     private final Context context;
     private final List<Message> messages;
 
-    private static final int VIEW_TYPE_MESSAGE_SENT = 1;
-    private static final int VIEW_TYPE_MESSAGE_RECEIVED = 2;
+    private final int VIEW_TYPE_SEND = 1;
+    private final int VIEW_TYPE_RECEIVE = 2;
+    private final int VIEW_TYPE_JOIN = 3;
+    private final int VIEW_TYPE_QUIT = 4;
 
     public MessageAdapter(Context context, List<Message> messages) {
         this.context = context;
@@ -48,34 +48,47 @@ public class MessageAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         Message message = messages.get(position);
-        User currentUser = App.user.getValue();
 
-        assert currentUser != null;
-        if (message.getObject().getName().equals(currentUser.getName())) {
-            return VIEW_TYPE_MESSAGE_SENT;
-        } else {
-            return VIEW_TYPE_MESSAGE_RECEIVED;
+        switch (message.getMessageType()) {
+            case SEND:
+                return VIEW_TYPE_SEND;
+            case RECEIVE:
+                return VIEW_TYPE_RECEIVE;
+            case JOIN:
+                return VIEW_TYPE_JOIN;
+            case QUIT:
+                return VIEW_TYPE_QUIT;
+            default:
+                return -1;
         }
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_MESSAGE_SENT) {
-            return new MessageSentViewHolder(ItemMessageSendBinding.inflate(
-                    LayoutInflater.from(context),
-                    parent,
-                    false
-            ));
-        } else if (viewType == VIEW_TYPE_MESSAGE_RECEIVED) {
-            return new MessageReceivedViewHolder(ItemMessageReceiveBinding.inflate(
-                    LayoutInflater.from(context),
-                    parent,
-                    false
-            ));
+        switch (viewType) {
+            case VIEW_TYPE_SEND:
+                return new MessageSentViewHolder(ItemMessageSendBinding.inflate(
+                        LayoutInflater.from(context),
+                        parent,
+                        false
+                ));
+            case VIEW_TYPE_RECEIVE:
+                return new MessageReceivedViewHolder(ItemMessageReceiveBinding.inflate(
+                        LayoutInflater.from(context),
+                        parent,
+                        false
+                ));
+            case VIEW_TYPE_JOIN:
+            case VIEW_TYPE_QUIT:
+                return new GroupMemberChangeViewHolder(ItemGroupMemberChangeBinding.inflate(
+                        LayoutInflater.from(context),
+                        parent,
+                        false
+                ));
+            default:
+                return null;
         }
-
-        return null;
     }
 
     @Override
@@ -83,11 +96,15 @@ public class MessageAdapter extends RecyclerView.Adapter {
         Message message = messages.get(position);
 
         switch (holder.getItemViewType()) {
-            case VIEW_TYPE_MESSAGE_SENT:
+            case VIEW_TYPE_SEND:
                 ((MessageSentViewHolder) holder).bind(message);
                 break;
-            case VIEW_TYPE_MESSAGE_RECEIVED:
+            case VIEW_TYPE_RECEIVE:
                 ((MessageReceivedViewHolder) holder).bind(context, message);
+                break;
+            case VIEW_TYPE_JOIN:
+            case VIEW_TYPE_QUIT:
+                ((GroupMemberChangeViewHolder) holder).bind(message);
                 break;
         }
     }
@@ -131,7 +148,16 @@ public class MessageAdapter extends RecyclerView.Adapter {
         }
 
         void bind(Message message) {
-            memberChangeBinding.tvGroupJoinQuit.setText(message.getObject().getName() + "");
+            switch (message.getMessageType()) {
+                case JOIN:
+                    String join_prompt = message.getObject().getName() + " has joined the group";
+                    memberChangeBinding.tvGroupMemberChange.setText(join_prompt);
+                    break;
+                case QUIT:
+                    String quit_prompt = message.getObject().getName() + " has left the group";
+                    memberChangeBinding.tvGroupMemberChange.setText(quit_prompt);
+                    break;
+            }
         }
     }
 }

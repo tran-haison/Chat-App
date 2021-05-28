@@ -73,7 +73,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_vertical"
+                android:layout_marginVertical="@dimen/margin_vertical"
                 android:paddingHorizontal="@dimen/margin_horizontal">
 
                 <TextView

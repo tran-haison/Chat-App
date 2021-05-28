@@ -2,8 +2,14 @@ package com.example.chat_client.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class ViewUtil {
 
@@ -25,4 +31,6 @@ public class ViewUtil {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+
 }

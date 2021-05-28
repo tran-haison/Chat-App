@@ -30,6 +30,10 @@ public class ChatViewModel extends ViewModel {
         client.sendMessage(RequestMessage.groupMessage(group, message));
     }
 
+    public void listAllMembers(Group group) {
+        client.sendMessage(RequestMessage.listAllMember(group));
+    }
+
     public LiveData<String> responseLiveData() {
         return App.responseMessage;
     }

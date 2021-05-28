@@ -8,8 +8,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.chat_client.models.User;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -22,8 +26,8 @@ public class Client {
     private BufferedReader input;
 
     private final Handler handler = new Handler();
-    private final MutableLiveData<String> responseMessage = new MutableLiveData<>();
-    private final MutableLiveData<User> userMutableLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> responseMessageLiveData = new MutableLiveData<>();
+    private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
     public static final String IP_ADDRESS = "192.168.1.14";
@@ -73,7 +77,7 @@ public class Client {
                 charsRead = input.read(buffer);
                 String message = new String(buffer).substring(0, charsRead);
                 Log.d(TAG, ">>>>>>>>>> Server response: " + message);
-                handler.post(() -> responseMessage.setValue(message));
+                handler.post(() -> responseMessageLiveData.setValue(message));
             } catch (Exception e) {
                 Log.d(TAG, "Error: " + e.getMessage());
                 closeSocket();
@@ -99,6 +103,33 @@ public class Client {
         thread.start();
     }
 
+    public void sendFile(final String path) {
+        Thread thread = new Thread(() -> {
+            try {
+                Socket clientSocket = new Socket(IP_ADDRESS, PORT);
+
+                FileInputStream fileInputStream;
+                BufferedInputStream bufferedInputStream;
+                File file = new File(path);
+                byte[] bytes = new byte[(int) file.length()];
+
+                fileInputStream = new FileInputStream(file);
+                bufferedInputStream = new BufferedInputStream(fileInputStream);
+                bufferedInputStream.read(bytes, 0, bytes.length);
+
+                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
+                // TODO:
+                //out.writeObject(message);
+                out.flush();
+
+                clientSocket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
+    }
+
     public void closeSocket() {
         try {
             socket.close();
@@ -107,16 +138,16 @@ public class Client {
         }
     }
 
-    public void setUser(User user) {
-        this.userMutableLiveData.setValue(user);
+    public void setUserLiveData(User userLiveData) {
+        this.userLiveData.setValue(userLiveData);
     }
 
     public LiveData<User> userLiveData() {
-        return userMutableLiveData;
+        return userLiveData;
     }
 
     public LiveData<String> responseMessageLiveData() {
-        return responseMessage;
+        return responseMessageLiveData;
     }
 
 }

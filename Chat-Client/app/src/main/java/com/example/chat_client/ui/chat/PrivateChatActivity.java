@@ -20,6 +20,8 @@ import com.example.chat_client.utils.MessageUtil;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.chat_client.models.Message.MessageType.RECEIVE;
+import static com.example.chat_client.models.Message.MessageType.SEND;
 import static com.example.chat_client.socket.ResponseMessage.FAIL_FRIENDMSG;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FRIENDMSG;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_MESSAGE_FROM_FRIEND;
@@ -90,10 +92,10 @@ public class PrivateChatActivity extends AppCompatActivity {
     }
 
     private void onMessageReceived(String serverMessage) {
-        String senderName = MessageUtil.senderOfMessage(serverMessage);
+        String senderName = MessageUtil.messageToName(serverMessage);
         if (senderName.equals(friend.getName())) {
             String messageFromFriend = MessageUtil.messageToChat(serverMessage);
-            Message friendMessage = new Message(messageFromFriend, friend);
+            Message friendMessage = new Message(messageFromFriend, friend, RECEIVE);
             adapter.addMessage(friendMessage);
             binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
         }
@@ -101,7 +103,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
     private void onMessageSent() {
         String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
-        Message myMessage = new Message(messageFromMe, me);
+        Message myMessage = new Message(messageFromMe, me, SEND);
         adapter.addMessage(myMessage);
         binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
         binding.etChatMessage.setText("");

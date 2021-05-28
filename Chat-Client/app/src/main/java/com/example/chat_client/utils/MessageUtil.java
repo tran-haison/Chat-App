@@ -33,6 +33,11 @@ public class MessageUtil {
         return split[0] + " " + split[1];
     }
 
+    /**
+     * Get list of users from server response message
+     * @param message server message
+     * @return list of users
+     */
     public static List<User> messageToUsers(String message) {
         List<User> users = new ArrayList<>();
         List<String> tokens = splitMessage(message);
@@ -45,6 +50,11 @@ public class MessageUtil {
         return users;
     }
 
+    /**
+     * Get list of groups from server response message
+     * @param message server message
+     * @return list of groups
+     */
     public static List<Group> messageToGroups(String message) {
         List<Group> groups = new ArrayList<>();
         List<String> tokens = splitMessage(message);
@@ -57,12 +67,22 @@ public class MessageUtil {
         return groups;
     }
 
+    /**
+     * Get the chat string from server response message
+     * @param message server message
+     * @return chat
+     */
     public static String messageToChat(String message) {
         String[] split = message.split("\\s+", 4);
         return split[3].trim();
     }
 
-    public static String senderOfMessage(String message) {
+    /**
+     * Get the name of user or group
+     * @param message server message
+     * @return name of an user or a group
+     */
+    public static String messageToName(String message) {
         String[] split = message.split("\\s+", 4);
         return split[2].trim();
     }

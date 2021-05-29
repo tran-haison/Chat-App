@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -15,7 +16,7 @@ public class ImageUtil {
 
     public static byte[] getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, byteArrayOutputStream);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
 
@@ -32,6 +33,15 @@ public class ImageUtil {
             e.printStackTrace();
         }
         return BitmapFactory.decodeStream(fileInputStream);
+    }
+
+    public static String encodeImageBytesToBase64(byte[] image_bytes) {
+        return Base64.encodeToString(image_bytes, Base64.DEFAULT);
+    }
+
+    public static Bitmap decodeBase64ToBitmap(String imageString) {
+        byte[] decodedString = Base64.decode(imageString, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
 }

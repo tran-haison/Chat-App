@@ -78,6 +78,16 @@ public class MessageUtil {
     }
 
     /**
+     * Get the file as base 64 string from server
+     * @param message server message
+     * @return file as base 64
+     */
+    public static String messageToFile(String message) {
+        String[] split = message.split("\\s+", 4);
+        return split[3].trim();
+    }
+
+    /**
      * Get the name of user or group
      * @param message server message
      * @return name of an user or a group

@@ -2,6 +2,7 @@ package com.example.chat_client.adapters.list_view_adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -97,7 +98,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         switch (holder.getItemViewType()) {
             case VIEW_TYPE_SEND:
-                ((MessageSentViewHolder) holder).bind(message);
+                ((MessageSentViewHolder) holder).bind(context, message);
                 break;
             case VIEW_TYPE_RECEIVE:
                 ((MessageReceivedViewHolder) holder).bind(context, message);
@@ -122,6 +123,10 @@ public class MessageAdapter extends RecyclerView.Adapter {
             receiveBinding.tvMessageReceive.setText(message.getMessage());
             receiveBinding.tvTime.setText(message.getCreateAt());
             Glide.with(context).load(message.getObject().getAvatar()).into(receiveBinding.ivAva);
+            if (message.getImageBitmap() != null) {
+                receiveBinding.ivImage.setVisibility(View.VISIBLE);
+                Glide.with(context).load(message.getImageBitmap()).into(receiveBinding.ivImage);
+            }
         }
     }
 
@@ -133,9 +138,13 @@ public class MessageAdapter extends RecyclerView.Adapter {
             this.sendBinding = sendBinding;
         }
 
-        void bind(Message message) {
+        void bind(Context context, Message message) {
             sendBinding.tvMessageSend.setText(message.getMessage());
             sendBinding.tvTime.setText(message.getCreateAt());
+            if (message.getImageBitmap() != null) {
+                sendBinding.ivImage.setVisibility(View.VISIBLE);
+                Glide.with(context).load(message.getImageBitmap()).into(sendBinding.ivImage);
+            }
         }
     }
 

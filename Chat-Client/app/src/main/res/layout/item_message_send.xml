@@ -1,43 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingHorizontal="@dimen/margin_horizontal"
     android:paddingVertical="@dimen/padding_vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvMessageSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        app:cardBackgroundColor="@color/colorBlue2"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="0dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tvMessageSend"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvMessageSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/padding_horizontal"
-            android:layout_marginVertical="7dp"
-            android:fontFamily="@font/poppins"
-            android:maxWidth="260dp"
-            android:text="@string/this_is_a_message"
-            android:textColor="@color/white" />
+            android:layout_alignParentEnd="true"
+            app:cardBackgroundColor="@color/colorBlue2"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
 
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/tvMessageSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="@dimen/padding_horizontal"
+                android:layout_marginVertical="7dp"
+                android:fontFamily="@font/poppins"
+                android:maxWidth="260dp"
+                android:text="@string/this_is_a_message"
+                android:textColor="@color/white" />
 
-    <TextView
-        android:id="@+id/tvTime"
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/padding_horizontal"
+            android:layout_toStartOf="@id/cvMessageSend"
+            android:text="@string/_10_00"
+            android:textColor="@color/colorGray"
+            android:textSize="@dimen/text_detail" />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/padding_horizontal"
-        android:layout_toStartOf="@id/cvMessageSend"
-        android:text="@string/_10_00"
-        android:textColor="@color/colorGray"
-        android:textSize="@dimen/text_detail" />
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/margin_vertical"
+        android:maxWidth="150dp"
+        android:visibility="gone"/>
 
-</RelativeLayout>
+</LinearLayout>

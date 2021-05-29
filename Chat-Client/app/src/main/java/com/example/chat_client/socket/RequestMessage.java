@@ -52,17 +52,8 @@ public class RequestMessage {
         return "FRIENDMSG " + user.getName() + " " + message;
     }
 
-    public static byte[] friendFile(User user, byte[] file) {
-        // Convert string to byte[]
-        String protocol = "FRIEND_FILE " + user.getName() + " ";
-        byte[] protocolBytes = protocol.getBytes(StandardCharsets.UTF_8);
-
-        // Create new byte[] and copy 2 protocolBytes and file into messageByte
-        byte[] messageBytes = new byte[protocolBytes.length + file.length];
-        System.arraycopy(protocolBytes, 0, messageBytes, 0, protocolBytes.length);
-        System.arraycopy(file, 0, messageBytes, protocolBytes.length, file.length);
-
-        return messageBytes;
+    public static String friendFile(User user, String file) {
+        return "FRIEND_FILE " + user.getName() + " " + file;
     }
 
     /*********
@@ -105,17 +96,8 @@ public class RequestMessage {
         return "GROUPMSG " + group.getName() + " " + message;
     }
 
-    public static byte[] groupFile(Group group, byte[] file) {
-        // Convert protocol string to byte[]
-        String protocol = "GROUP_FILE " + group.getName() + " ";
-        byte[] protocolBytes = protocol.getBytes(StandardCharsets.UTF_8);
-
-        // Create new byte[] and copy 2 protocolBytes and file into messageByte
-        byte[] messageBytes = new byte[protocolBytes.length + file.length];
-        System.arraycopy(protocolBytes, 0, messageBytes, 0, protocolBytes.length);
-        System.arraycopy(file, 0, messageBytes, protocolBytes.length, file.length);
-
-        return messageBytes;
+    public static String groupFile(Group group, String file) {
+        return "GROUP_FILE " + group.getName() + " " + file;
     }
 
     /**********

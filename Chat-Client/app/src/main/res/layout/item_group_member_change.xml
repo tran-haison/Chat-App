@@ -13,6 +13,6 @@
         android:includeFontPadding="false"
         android:text="@string/username"
         android:textAlignment="center"
-        android:textColor="@color/colorIcon" />
+        android:textColor="@color/colorGray"/>
 
 </RelativeLayout>

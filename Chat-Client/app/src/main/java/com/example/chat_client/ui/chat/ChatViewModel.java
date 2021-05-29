@@ -29,8 +29,8 @@ public class ChatViewModel extends ViewModel {
         client.sendMessage(RequestMessage.listAllMember(group));
     }
 
-    public void friendFile(User user, byte[] file) {
-        client.sendFile(RequestMessage.friendFile(user, file));
+    public void friendFile(User user, String file) {
+        client.sendMessage(RequestMessage.friendFile(user, file));
     }
 
     public LiveData<String> responseLiveData() {

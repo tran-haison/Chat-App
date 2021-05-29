@@ -21,7 +21,7 @@ public class FileUtil {
      * @return full path of file
      */
     @SuppressLint("NewApi")
-    public static String getPath(Context context, Uri uri) {
+    public static String getPathFromUri(Context context, Uri uri) {
         final boolean needToCheckUri = Build.VERSION.SDK_INT >= 19;
         String selection = null;
         String[] selectionArgs = null;
@@ -76,6 +76,13 @@ public class FileUtil {
             return uri.getPath();
         }
         return null;
+    }
+
+    public static String getNameFromUri(Context context, Uri uri) {
+        // Get image path and name
+        String path = getPathFromUri(context, uri);
+        assert path != null;
+        return path.substring(path.lastIndexOf("/") + 1);
     }
 
     /**

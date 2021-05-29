@@ -71,7 +71,7 @@ public class NetworkUserFragment extends Fragment {
                     break;
                 case SUCCESS_ADD_FRIEND:
                     Toast.makeText(getActivity(), SUCCESS_ADD_FRIEND, Toast.LENGTH_LONG).show();
-                    viewModel.listUser();
+                    //viewModel.listUser();
                     break;
                 case FAIL_ADD_FRIEND:
                     Snackbar.make(binding.getRoot(), "FAIL ALREADY_ADD_FRIEND", Snackbar.LENGTH_LONG).show();

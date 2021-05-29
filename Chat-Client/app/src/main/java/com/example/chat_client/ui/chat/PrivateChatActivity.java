@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,13 +31,14 @@ import com.example.chat_client.utils.PermissionManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 import static com.example.chat_client.models.Message.MessageType.RECEIVE;
 import static com.example.chat_client.models.Message.MessageType.SEND;
 import static com.example.chat_client.socket.ResponseMessage.FAIL_FRIENDMSG;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FILE_FROM_FRIEND;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FRIENDMSG;
+import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FRIEND_FILE;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_MESSAGE_FROM_FRIEND;
 import static com.example.chat_client.utils.IntentCall.REQUEST_SELECT_IMAGE;
 
@@ -51,6 +51,7 @@ public class PrivateChatActivity extends AppCompatActivity {
     private final User me = App.user.getValue();
 
     private MessageAdapter adapter;
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +109,12 @@ public class PrivateChatActivity extends AppCompatActivity {
                     Toast.makeText(this, FAIL_FRIENDMSG, Toast.LENGTH_LONG).show();
                     binding.etChatMessage.setText("");
                     break;
+                case SUCCESS_FRIEND_FILE:
+                    onFileSent();
+                    break;
+                case SUCCESS_FILE_FROM_FRIEND:
+                    onFileReceived(serverMessage);
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,17 +126,41 @@ public class PrivateChatActivity extends AppCompatActivity {
         if (senderName.equals(friend.getName())) {
             String messageFromFriend = MessageUtil.messageToChat(serverMessage);
             Message friendMessage = new Message(messageFromFriend, friend, RECEIVE);
-            adapter.addMessage(friendMessage);
-            binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
+            addNewMessageToView(friendMessage);
         }
     }
 
     private void onMessageSent() {
         String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
         Message myMessage = new Message(messageFromMe, me, SEND);
-        adapter.addMessage(myMessage);
-        binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
+        addNewMessageToView(myMessage);
         binding.etChatMessage.setText("");
+    }
+
+    private void onFileSent() {
+        try {
+            String filename = FileUtil.getNameFromUri(this, uri);
+            Bitmap imageBitmap = ImageUtil.getBitmapFromUri(this, uri);
+            Message myMessage = new Message(filename, me, SEND, imageBitmap);
+            addNewMessageToView(myMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void onFileReceived(String serverMessage) {
+        String senderName = MessageUtil.messageToName(serverMessage);
+        if (senderName.equals(friend.getName())) {
+            String imageString = MessageUtil.messageToFile(serverMessage);
+            Bitmap bitmap = ImageUtil.decodeBase64ToBitmap(imageString);
+            Message friendMessage = new Message("Image", friend, RECEIVE, bitmap);
+            addNewMessageToView(friendMessage);
+        }
+    }
+
+    private void addNewMessageToView(Message message) {
+        adapter.addMessage(message);
+        binding.rvChat.smoothScrollToPosition(adapter.getItemCount() - 1);
     }
 
     private void sendMessage() {
@@ -139,20 +170,10 @@ public class PrivateChatActivity extends AppCompatActivity {
         }
     }
 
-    private void getImageData(Uri uri) {
-        // Get image path and name
-        String path = FileUtil.getPath(this, uri);
-        assert path != null;
-        String filename = path.substring(path.lastIndexOf("/") + 1);
-
-        // Convert image from bitmap to byte[]
-        Bitmap bitmap = ImageUtil.getBitmapFromPath(path);
+    private void showImageSentDialog(String filename, Bitmap bitmap) {
         byte[] image_bytes = ImageUtil.getBytesFromBitmap(bitmap);
+        String imageFile = ImageUtil.encodeImageBytesToBase64(image_bytes);
 
-        showImageSentDialog(filename, bitmap, image_bytes);
-    }
-
-    private void showImageSentDialog(String filename, Bitmap bitmap, byte[] image_bytes) {
         DialogUtils.dialogSendImage(
                 this,
                 filename,
@@ -164,7 +185,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
                     @Override
                     public void onPositiveClicked(Object object) {
-                        viewModel.friendFile(me, image_bytes);
+                        viewModel.friendFile(friend, imageFile);
                     }
                 });
     }
@@ -194,10 +215,11 @@ public class PrivateChatActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null) {
             if (requestCode == REQUEST_SELECT_IMAGE) {
-                // Get image path and filename from uri
-                Uri uri = data.getData();
+                uri = data.getData();
                 try {
-                    getImageData(uri);
+                    String filename = FileUtil.getNameFromUri(this, uri);
+                    Bitmap bitmap = ImageUtil.getBitmapFromUri(this, uri);
+                    showImageSentDialog(filename, bitmap);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

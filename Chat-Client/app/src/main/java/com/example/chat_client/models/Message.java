@@ -1,5 +1,7 @@
 package com.example.chat_client.models;
 
+import android.graphics.Bitmap;
+
 import com.example.chat_client.utils.CalendarUtil;
 
 public class Message {
@@ -14,13 +16,23 @@ public class Message {
     private String message;
     private Object object;
     private final String createAt;
-    private MessageType messageType;
+    private final MessageType messageType;
+    private Bitmap imageBitmap;
+
+    public Message(String message, Object object, MessageType messageType, Bitmap imageBitmap) {
+        this.message = message;
+        this.object = object;
+        this.messageType = messageType;
+        this.createAt = CalendarUtil.getCurrentTime();
+        this.imageBitmap = imageBitmap;
+    }
 
     public Message(String message, Object object, MessageType messageType) {
         this.message = message;
         this.object = object;
         this.messageType = messageType;
         this.createAt = CalendarUtil.getCurrentTime();
+        this.imageBitmap = null;
     }
 
     public Message(Object object, MessageType messageType) {
@@ -28,6 +40,7 @@ public class Message {
         this.object = object;
         this.messageType = messageType;
         this.createAt = CalendarUtil.getCurrentTime();
+        this.imageBitmap = null;
     }
 
     public String getMessage() {
@@ -54,4 +67,11 @@ public class Message {
         return messageType;
     }
 
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
+    }
 }

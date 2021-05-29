@@ -68,4 +68,12 @@
 
     </LinearLayout>
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_vertical"
+        android:maxWidth="150dp"
+        android:visibility="gone"/>
+
 </LinearLayout>

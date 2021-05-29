@@ -116,8 +116,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvSendMessage"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="60dp"
+                android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginHorizontal="@dimen/margin_horizontal"

@@ -1,9 +1,12 @@
 package com.example.chat_client.ui.chat;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +18,9 @@ import com.example.chat_client.databinding.ActivityPrivateChatBinding;
 import com.example.chat_client.models.Message;
 import com.example.chat_client.models.User;
 import com.example.chat_client.utils.Constants;
+import com.example.chat_client.utils.FileUtil;
+import com.example.chat_client.utils.ImageUtil;
+import com.example.chat_client.utils.IntentCall;
 import com.example.chat_client.utils.MessageUtil;
 
 import java.util.ArrayList;
@@ -25,6 +31,8 @@ import static com.example.chat_client.models.Message.MessageType.SEND;
 import static com.example.chat_client.socket.ResponseMessage.FAIL_FRIENDMSG;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FRIENDMSG;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_MESSAGE_FROM_FRIEND;
+import static com.example.chat_client.utils.IntentCall.REQUEST_SELECT_FILE;
+import static com.example.chat_client.utils.IntentCall.REQUEST_SELECT_IMAGE;
 
 public class PrivateChatActivity extends AppCompatActivity {
 
@@ -56,6 +64,8 @@ public class PrivateChatActivity extends AppCompatActivity {
         // View events
         binding.ibBack.setOnClickListener(v -> onBackPressed());
         binding.cvSendMessage.setOnClickListener(v -> sendMessage());
+        binding.ibImage.setOnClickListener(v -> IntentCall.selectImage(this));
+        binding.ibFile.setOnClickListener(v -> IntentCall.selectFile(this));
     }
 
     private void getIntentFriendInfo() {
@@ -120,5 +130,29 @@ public class PrivateChatActivity extends AppCompatActivity {
         if (!chat.isEmpty()) {
             viewModel.friendMessage(friend, chat);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null) {
+            switch (requestCode) {
+                case REQUEST_SELECT_IMAGE:
+                    // Get image path and filename from uri
+                    Uri uri = data.getData();
+                    String path = FileUtil.getPath(this, uri);
+                    String filename = path.substring(path.lastIndexOf("/") + 1);
+
+                    // Convert image from uri to bytes array
+                    Bitmap bitmap = ImageUtil.getBitmapFromPath(path);
+                    byte[] image_bytes = ImageUtil.getBytesFromBitmap(bitmap);
+
+
+                    break;
+                case REQUEST_SELECT_FILE:
+                    break;
+            }
+        }
+
     }
 }

@@ -30,11 +30,4 @@ public class IntentCall {
         fileManager.setType("*/*");
         activity.startActivityForResult(fileManager, REQUEST_SELECT_FILE);
     }
-
-//    public String onResultSelectFile(Intent data) {
-//        Uri uri = data.getData();
-//        String path = FileUtil.getPath(uri);
-//        String filename = path.substring(path.lastIndexOf("/") + 1);
-//        return path;
-//    }
 }

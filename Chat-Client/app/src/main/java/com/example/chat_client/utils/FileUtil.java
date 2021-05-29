@@ -13,7 +13,6 @@ import android.util.Log;
 
 public class FileUtil {
 
-
     /**
      * Gets the file path of the given Uri.
      *
@@ -22,7 +21,7 @@ public class FileUtil {
      * @return full path of file
      */
     @SuppressLint("NewApi")
-    public static String getPath(Uri uri, Context context) {
+    public static String getPath(Context context, Uri uri) {
         final boolean needToCheckUri = Build.VERSION.SDK_INT >= 19;
         String selection = null;
         String[] selectionArgs = null;

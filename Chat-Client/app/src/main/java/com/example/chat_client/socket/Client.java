@@ -1,5 +1,6 @@
 package com.example.chat_client.socket;
 
+import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 
@@ -7,16 +8,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.chat_client.models.User;
+import com.example.chat_client.utils.ImageUtil;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Client {
 
@@ -30,7 +30,7 @@ public class Client {
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
-    public static final String IP_ADDRESS = "192.168.1.14";
+    public static final String IP_ADDRESS = "192.168.1.238";
     public static final int PORT = 54000;
 
     private Client() {
@@ -103,26 +103,16 @@ public class Client {
         thread.start();
     }
 
-    public void sendFile(final String path) {
+    public void sendImage(final String path) {
         Thread thread = new Thread(() -> {
             try {
-                Socket clientSocket = new Socket(IP_ADDRESS, PORT);
-
-                FileInputStream fileInputStream;
-                BufferedInputStream bufferedInputStream;
-                File file = new File(path);
-                byte[] bytes = new byte[(int) file.length()];
-
-                fileInputStream = new FileInputStream(file);
-                bufferedInputStream = new BufferedInputStream(fileInputStream);
-                bufferedInputStream.read(bytes, 0, bytes.length);
-
-                ObjectOutputStream out = new ObjectOutputStream(clientSocket.getOutputStream());
-                // TODO:
-                //out.writeObject(message);
-                out.flush();
-
-                clientSocket.close();
+                // TODO: test this method and give feedback
+                Bitmap bitmap = ImageUtil.getBitmapFromPath(path);
+                final byte[] imageBytes = ImageUtil.getBytesFromBitmap(bitmap);
+                OutputStream output = socket.getOutputStream();
+                output.write(imageBytes);
+                output.flush();
+                Log.d(TAG, "Image bytes array: " + Arrays.toString(imageBytes));
             } catch (Exception e) {
                 e.printStackTrace();
             }

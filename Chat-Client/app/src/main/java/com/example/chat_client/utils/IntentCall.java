@@ -24,10 +24,4 @@ public class IntentCall {
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
         activity.startActivityForResult(chooserIntent, REQUEST_SELECT_IMAGE);
     }
-
-    public static void selectFile(Activity activity) {
-        Intent fileManager = new Intent(Intent.ACTION_GET_CONTENT);
-        fileManager.setType("*/*");
-        activity.startActivityForResult(fileManager, REQUEST_SELECT_FILE);
-    }
 }

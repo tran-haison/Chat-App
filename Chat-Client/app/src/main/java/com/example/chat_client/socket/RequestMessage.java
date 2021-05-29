@@ -3,6 +3,9 @@ package com.example.chat_client.socket;
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.User;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 public class RequestMessage {
 
     /***********
@@ -49,6 +52,19 @@ public class RequestMessage {
         return "FRIENDMSG " + user.getName() + " " + message;
     }
 
+    public static byte[] friendFile(User user, byte[] file) {
+        // Convert string to byte[]
+        String protocol = "FRIEND_FILE " + user.getName() + " ";
+        byte[] protocolBytes = protocol.getBytes(StandardCharsets.UTF_8);
+
+        // Create new byte[] and copy 2 protocolBytes and file into messageByte
+        byte[] messageBytes = new byte[protocolBytes.length + file.length];
+        System.arraycopy(protocolBytes, 0, messageBytes, 0, protocolBytes.length);
+        System.arraycopy(file, 0, messageBytes, protocolBytes.length, file.length);
+
+        return messageBytes;
+    }
+
     /*********
      * GROUP *
      *********/
@@ -87,6 +103,19 @@ public class RequestMessage {
 
     public static String groupMessage(Group group, String message) {
         return "GROUPMSG " + group.getName() + " " + message;
+    }
+
+    public static byte[] groupFile(Group group, byte[] file) {
+        // Convert protocol string to byte[]
+        String protocol = "GROUP_FILE " + group.getName() + " ";
+        byte[] protocolBytes = protocol.getBytes(StandardCharsets.UTF_8);
+
+        // Create new byte[] and copy 2 protocolBytes and file into messageByte
+        byte[] messageBytes = new byte[protocolBytes.length + file.length];
+        System.arraycopy(protocolBytes, 0, messageBytes, 0, protocolBytes.length);
+        System.arraycopy(file, 0, messageBytes, protocolBytes.length, file.length);
+
+        return messageBytes;
     }
 
     /**********

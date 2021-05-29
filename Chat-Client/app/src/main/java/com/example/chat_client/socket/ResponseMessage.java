@@ -25,6 +25,8 @@ public class ResponseMessage {
     public static final String SUCCESS_FRIENDMSG = "SUCCESS FRIENDMSG";
     public static final String SUCCESS_MESSAGE_FROM_FRIEND = "SUCCESS MESSAGE_FROM_FRIEND";
     public static final String FAIL_FRIENDMSG = "FAIL FRIENDMSG";
+    public static final String SUCCESS_FRIEND_FILE = "SUCCESS FRIEND_FILE";
+    public static final String SUCCESS_FILE_FROM_FRIEND = "SUCCESS FILE_FROM_FRIEND";
 
     /*********
      * GROUP *
@@ -47,6 +49,8 @@ public class ResponseMessage {
     public static final String FAIL_QUIT = "FAIL QUIT";
     public static final String FAIL_LIST_ALL_MEMBER = "FAIL LIST_ALL_MEMBER";
     public static final String FAIL_GROUPMSG = "FAIL GROUPMSG";
+    public static final String SUCCESS_GROUP_FILE = "SUCCESS GROUP_FILE";
+    public static final String SUCCESS_FILE_FROM_MEMBER = "SUCCESS FILE_FROM_MEMBER";
 
     /**********
      * PEOPLE *

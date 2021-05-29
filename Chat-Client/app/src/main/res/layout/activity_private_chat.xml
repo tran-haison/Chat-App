@@ -42,22 +42,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_toStartOf="@id/ibImage"
                 android:layout_toEndOf="@id/ivAva"
                 android:fontFamily="@font/quicksand_medium"
                 android:includeFontPadding="false"
                 android:text="@string/username"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_heading" />
-
-            <ImageButton
-                android:id="@+id/ibFile"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_centerVertical="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="@string/back"
-                android:src="@drawable/ic_file"
-                android:layout_toStartOf="@id/ibImage"/>
 
             <ImageButton
                 android:id="@+id/ibImage"

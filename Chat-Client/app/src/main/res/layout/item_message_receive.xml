@@ -53,7 +53,6 @@
                 android:fontFamily="@font/poppins"
                 android:maxWidth="260dp"
                 android:text="@string/this_is_a_message"
-                android:textAlignment="center"
                 android:textColor="@color/colorLightBlack" />
 
         </androidx.cardview.widget.CardView>

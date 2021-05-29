@@ -11,6 +11,7 @@ import com.example.chat_client.models.User;
 import com.example.chat_client.utils.ImageUtil;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -30,7 +31,7 @@ public class Client {
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
-    public static final String IP_ADDRESS = "192.168.1.238";
+    public static final String IP_ADDRESS = "192.168.1.14";
     public static final int PORT = 54000;
 
     private Client() {
@@ -103,16 +104,15 @@ public class Client {
         thread.start();
     }
 
-    public void sendImage(final String path) {
+    public void sendFile(byte[] fileBytes) {
         Thread thread = new Thread(() -> {
             try {
                 // TODO: test this method and give feedback
-                Bitmap bitmap = ImageUtil.getBitmapFromPath(path);
-                final byte[] imageBytes = ImageUtil.getBytesFromBitmap(bitmap);
                 OutputStream output = socket.getOutputStream();
-                output.write(imageBytes);
-                output.flush();
-                Log.d(TAG, "Image bytes array: " + Arrays.toString(imageBytes));
+                DataOutputStream dataOutputStream = new DataOutputStream(output);
+                dataOutputStream.writeInt(fileBytes.length);
+                dataOutputStream.write(fileBytes, 0, fileBytes.length);
+                Log.d(TAG, "Image bytes array: " + Arrays.toString(fileBytes));
             } catch (Exception e) {
                 e.printStackTrace();
             }

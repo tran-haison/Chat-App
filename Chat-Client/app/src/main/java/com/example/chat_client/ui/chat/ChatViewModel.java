@@ -1,18 +1,13 @@
 package com.example.chat_client.ui.chat;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.chat_client.App;
 import com.example.chat_client.models.Group;
-import com.example.chat_client.models.Message;
 import com.example.chat_client.models.User;
 import com.example.chat_client.socket.Client;
 import com.example.chat_client.socket.RequestMessage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ChatViewModel extends ViewModel {
 
@@ -32,6 +27,10 @@ public class ChatViewModel extends ViewModel {
 
     public void listAllMembers(Group group) {
         client.sendMessage(RequestMessage.listAllMember(group));
+    }
+
+    public void friendFile(User user, byte[] file) {
+        client.sendFile(RequestMessage.friendFile(user, file));
     }
 
     public LiveData<String> responseLiveData() {

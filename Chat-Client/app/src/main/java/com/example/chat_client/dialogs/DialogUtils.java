@@ -1,6 +1,7 @@
 package com.example.chat_client.dialogs;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.example.chat_client.R;
 import com.example.chat_client.models.Object;
@@ -31,6 +32,21 @@ public class DialogUtils {
                 object,
                 object.getName(),
                 content,
+                listener
+        );
+        dialog.show();
+    }
+
+    public static void dialogSendImage(
+            Context context,
+            String title,
+            Bitmap bitmap,
+            DialogButtonListener listener
+    ) {
+        DialogSendImage dialog = new DialogSendImage(
+                context,
+                title,
+                bitmap,
                 listener
         );
         dialog.show();

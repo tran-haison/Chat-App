@@ -11,12 +11,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.chat_client.R;
 import com.example.chat_client.databinding.ActivityMainBinding;
-import com.example.chat_client.models.User;
 import com.example.chat_client.ui.user.UserInfoActivity;
+import com.example.chat_client.utils.MessageUtil;
 
 public class MainActivity extends AppCompatActivity {
 
     private MainViewModel viewModel;
+    private MainActivityUtils mainActivityUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
+        mainActivityUtils = new MainActivityUtils(this);
 
         // Setup ViewModel
         setupViewModel();
@@ -40,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupViewModel() {
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+        viewModel.responseMessageLiveData().observe(this, serverResponse -> {
+            try {
+                mainActivityUtils.handleServerResponse(serverResponse);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void goToUserInfoActivity() {

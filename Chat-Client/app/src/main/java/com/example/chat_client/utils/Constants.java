@@ -2,6 +2,7 @@ package com.example.chat_client.utils;
 
 public class Constants {
 
+    public static final String OBJECT = "object";
     public static final String FRIEND = "friend";
     public static final String GROUP = "group";
     public static final String MEMBERS = "members";
@@ -9,6 +10,8 @@ public class Constants {
     public static final String SEARCH_TYPE = "search type";
     public static final String SEARCH_USER = "search user";
     public static final String SEARCH_GROUP = "search group";
+    public static final String NOTIFICATION_TYPE = "notification type";
+    public static final String SERVER_RESPONSE = "server response";
 
     public static final String NAME_INVALID = "Name is invalid!";
     public static final String USERNAME_INVALID = "Username is invalid!";

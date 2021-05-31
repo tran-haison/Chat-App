@@ -64,6 +64,34 @@
 
     </androidx.cardview.widget.CardView>
 
+    <LinearLayout
+        android:id="@+id/llChatPrompt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/line1"
+        android:layout_below="@id/cvToolbar"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_horizontal">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lavGreet"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="@dimen/margin_vertical"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/animation_greet" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:text="@string/type_a_message_to_start_your_conversation"
+            android:textAlignment="center"
+            android:textColor="@color/colorLightBlack" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvChat"
         android:layout_width="match_parent"
@@ -74,6 +102,7 @@
         android:divider="@color/white"
         android:dividerHeight="0dp"
         android:paddingVertical="@dimen/padding_vertical"
+        android:visibility="gone"
         app:stackFromEnd="true" />
 
     <View

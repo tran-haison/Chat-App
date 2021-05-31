@@ -2,6 +2,7 @@ package com.example.chat_client.ui.chat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -62,6 +63,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
         // View implementation
         initMessageRecyclerView();
+        setViewVisibility();
         Glide.with(this).load(group.getAvatar()).into(binding.ivAva);
         binding.tvGroupName.setText(group.getName());
 
@@ -91,6 +93,17 @@ public class GroupChatActivity extends AppCompatActivity {
         binding.rvChat.setAdapter(adapter);
     }
 
+    private void setViewVisibility() {
+        if (adapter.getItemCount() == 0) {
+            binding.rvChat.setVisibility(View.GONE);
+            binding.llChatPrompt.setVisibility(View.VISIBLE);
+            binding.lavGreet.playAnimation();
+        } else {
+            binding.rvChat.setVisibility(View.VISIBLE);
+            binding.llChatPrompt.setVisibility(View.GONE);
+        }
+    }
+
     private void handleServerResponse(String serverMessage) {
         try {
             String responseType = MessageUtil.responseType(serverMessage);
@@ -118,6 +131,7 @@ public class GroupChatActivity extends AppCompatActivity {
                     onNewMemberQuit(serverMessage);
                     break;
             }
+            setViewVisibility();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -67,6 +68,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
         // View init
         initMessageRecyclerView();
+        setViewVisibility();
         Glide.with(this).load(friend.getAvatar()).into(binding.ivAva);
         binding.tvUsername.setText(friend.getName());
 
@@ -95,6 +97,17 @@ public class PrivateChatActivity extends AppCompatActivity {
         binding.rvChat.setAdapter(adapter);
     }
 
+    private void setViewVisibility() {
+        if (adapter.getItemCount() == 0) {
+            binding.rvChat.setVisibility(View.GONE);
+            binding.llChatPrompt.setVisibility(View.VISIBLE);
+            binding.lavGreet.playAnimation();
+        } else {
+            binding.rvChat.setVisibility(View.VISIBLE);
+            binding.llChatPrompt.setVisibility(View.GONE);
+        }
+    }
+
     private void handleServerResponse(String serverMessage) {
         try {
             String responseType = MessageUtil.responseType(serverMessage);
@@ -116,6 +129,7 @@ public class PrivateChatActivity extends AppCompatActivity {
                     onFileReceived(serverMessage);
                     break;
             }
+            setViewVisibility();
         } catch (Exception e) {
             e.printStackTrace();
         }

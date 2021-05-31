@@ -26,7 +26,7 @@ public class Client {
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
-    public static final String IP_ADDRESS = "192.168.1.14";
+    public static final String IP_ADDRESS = "192.168.1.16";
     public static final int PORT = 54000;
 
     private Client() {

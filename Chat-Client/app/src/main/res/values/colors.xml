@@ -29,7 +29,10 @@
     <color name="colorBlue3">#053F9F</color>
 
     <!-- Green colors -->
-    <color name="colorGreen1">#64DC00</color>
+    <color name="colorGreen0">#D5FDB4</color>
+    <color name="colorGreen1">#91F63E</color>
+    <color name="colorGreen2">#4CA304</color>
+    <color name="colorGreen3">#11F184</color>
 
     <!-- Warm colors -->
     <color name="colorYellow1">#FFEA00</color>

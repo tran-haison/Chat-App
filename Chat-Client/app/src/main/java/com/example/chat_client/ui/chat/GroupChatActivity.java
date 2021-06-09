@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.chat_client.App;
-import com.example.chat_client.adapters.list_view_adapter.MessageAdapter;
+import com.example.chat_client.adapters.recyclerview.MessageAdapter;
 import com.example.chat_client.databinding.ActivityGroupChatBinding;
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.Message;
 import com.example.chat_client.models.User;
 import com.example.chat_client.ui.group.GroupInfoActivity;
 import com.example.chat_client.utils.Constants;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;

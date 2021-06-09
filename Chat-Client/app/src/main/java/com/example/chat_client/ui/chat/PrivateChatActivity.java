@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.example.chat_client.App;
-import com.example.chat_client.adapters.list_view_adapter.MessageAdapter;
+import com.example.chat_client.adapters.recyclerview.MessageAdapter;
 import com.example.chat_client.databinding.ActivityPrivateChatBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
 import com.example.chat_client.dialogs.DialogUtils;
@@ -26,7 +26,7 @@ import com.example.chat_client.utils.Constants;
 import com.example.chat_client.utils.FileUtil;
 import com.example.chat_client.utils.ImageUtil;
 import com.example.chat_client.utils.IntentCall;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 import com.example.chat_client.utils.PermissionManager;
 
 import org.jetbrains.annotations.NotNull;

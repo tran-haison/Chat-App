@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
+import com.example.chat_client.adapters.listview.ObjectAdapter;
 import com.example.chat_client.databinding.FragmentGroupBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
 import com.example.chat_client.dialogs.DialogUtils;
@@ -19,7 +19,7 @@ import com.example.chat_client.models.Object;
 import com.example.chat_client.ui.main.MainActivityUtils;
 import com.example.chat_client.ui.main.MainViewModel;
 import com.example.chat_client.utils.Constants;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
@@ -60,8 +60,7 @@ public class GroupFragment extends Fragment {
         binding.fabCreateGroup.setOnClickListener(v -> DialogUtils.dialogCreateObject(requireActivity(),
                 new DialogButtonListener() {
                     @Override
-                    public void onNegativeClicked() {
-                    }
+                    public void onNegativeClicked() {}
 
                     @Override
                     public void onPositiveClicked(Object object) {
@@ -105,12 +104,13 @@ public class GroupFragment extends Fragment {
 
     private void setViewVisibility() {
         if (groups == null || groups.size() <= 0) {
-            binding.lvGroups.setVisibility(View.GONE);
+            binding.llGroupList.setVisibility(View.GONE);
             binding.llGroupPrompt.setVisibility(View.VISIBLE);
             binding.lavGroup.playAnimation();
         } else {
-            binding.lvGroups.setVisibility(View.VISIBLE);
+            binding.llGroupList.setVisibility(View.VISIBLE);
             binding.llGroupPrompt.setVisibility(View.GONE);
+            binding.tvGroupCount.setText(String.valueOf(groups.size()));
             initGroupListView();
         }
     }

@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
-import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
+import com.example.chat_client.adapters.listview.ObjectAdapter;
 import com.example.chat_client.databinding.ActivityGroupInfoBinding;
 import com.example.chat_client.dialogs.DialogButtonListener;
 import com.example.chat_client.dialogs.DialogUtils;
@@ -17,7 +17,7 @@ import com.example.chat_client.models.Object;
 import com.example.chat_client.models.User;
 import com.example.chat_client.ui.main.MainActivity;
 import com.example.chat_client.utils.Constants;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;

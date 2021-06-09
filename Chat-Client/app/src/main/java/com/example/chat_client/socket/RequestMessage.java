@@ -3,9 +3,6 @@ package com.example.chat_client.socket;
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.User;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-
 public class RequestMessage {
 
     /***********
@@ -94,10 +91,6 @@ public class RequestMessage {
 
     public static String groupMessage(Group group, String message) {
         return "GROUPMSG " + group.getName() + " " + message;
-    }
-
-    public static String groupFile(Group group, String file) {
-        return "GROUP_FILE " + group.getName() + " " + file;
     }
 
     /**********

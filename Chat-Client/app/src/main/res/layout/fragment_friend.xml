@@ -30,14 +30,107 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ListView
-        android:id="@+id/lvFriends"
+    <LinearLayout
+        android:id="@+id/llFriendsLists"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:divider="@color/white"
-        android:dividerHeight="0dp"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_horizontal"
+            android:layout_marginBottom="@dimen/padding_vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/online"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="@dimen/text_heading" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardBackgroundColor="@color/colorLightGray"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvActiveFriendsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/padding_horizontal"
+                    android:layout_marginVertical="@dimen/padding_vertical"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/_10"
+                    android:textColor="@color/colorGray" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvOnlineFriends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/padding_horizontal"
+            android:layout_marginVertical="@dimen/padding_vertical" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_horizontal"
+            android:layout_marginVertical="@dimen/padding_vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/friends"
+                android:textColor="@color/colorLightBlack"
+                android:textSize="@dimen/text_heading" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardBackgroundColor="@color/colorLightGray"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvFriendsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="@dimen/padding_horizontal"
+                    android:layout_marginVertical="@dimen/padding_vertical"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:includeFontPadding="false"
+                    android:text="@string/_10"
+                    android:textColor="@color/colorGray" />
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/lvFriends"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:divider="@color/white"
+            android:dividerHeight="0dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llFriendPrompt"
@@ -45,7 +138,8 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/margin_horizontal">
+        android:padding="@dimen/margin_horizontal"
+        android:visibility="visible">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lavFriend"

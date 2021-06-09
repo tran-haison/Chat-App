@@ -26,7 +26,7 @@ public class Client {
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
 
     public static final String TAG = "ClientSocket";
-    public static final String IP_ADDRESS = "192.168.1.11";
+    public static final String IP_ADDRESS = "192.168.1.14";
     public static final int PORT = 54000;
 
     private Client() {
@@ -65,7 +65,7 @@ public class Client {
         Log.d(TAG, "Listening for server response...");
 
         int charsRead;
-        char[] buffer = new char[1024];
+        char[] buffer = new char[102400];
 
         // Infinite loop listening for response from server
         while (true) {

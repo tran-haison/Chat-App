@@ -1,4 +1,4 @@
-package com.example.chat_client.utils;
+package com.example.chat_client.socket;
 
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.User;

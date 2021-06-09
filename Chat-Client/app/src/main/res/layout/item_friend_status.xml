@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackgroundBorderless"
+    android:gravity="center"
+    android:maxWidth="80dp"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_vertical">
+
+    <RelativeLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivAva"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/img_user1" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/ic_status_online" />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/quicksand_medium"
+        android:includeFontPadding="false"
+        android:lines="1"
+        android:text="@string/username"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_default" />
+
+</LinearLayout>

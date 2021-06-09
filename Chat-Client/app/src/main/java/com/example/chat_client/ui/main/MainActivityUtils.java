@@ -12,7 +12,7 @@ import com.example.chat_client.ui.chat.GroupChatActivity;
 import com.example.chat_client.ui.chat.PrivateChatActivity;
 import com.example.chat_client.ui.search.SearchActivity;
 import com.example.chat_client.utils.Constants;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 
 import static com.example.chat_client.receivers.NotificationReceiver.FRIEND_ACCEPT;
 import static com.example.chat_client.receivers.NotificationReceiver.FRIEND_MESSAGE;

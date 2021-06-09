@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.chat_client.adapters.view_pager_adapter.NetworkViewPagerAdapter;
+import com.example.chat_client.adapters.viewpager.NetworkViewPagerAdapter;
 import com.example.chat_client.databinding.FragmentNetworkBinding;
 
 import org.jetbrains.annotations.NotNull;

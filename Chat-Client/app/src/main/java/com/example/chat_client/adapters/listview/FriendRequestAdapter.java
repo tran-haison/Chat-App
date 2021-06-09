@@ -1,4 +1,4 @@
-package com.example.chat_client.adapters.list_view_adapter;
+package com.example.chat_client.adapters.listview;
 
 import android.content.Context;
 import android.view.LayoutInflater;

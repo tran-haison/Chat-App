@@ -1,4 +1,4 @@
-package com.example.chat_client.adapters.list_view_adapter;
+package com.example.chat_client.adapters.recyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -124,7 +124,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             receiveBinding.tvTime.setText(message.getCreateAt());
             Glide.with(context).load(message.getObject().getAvatar()).into(receiveBinding.ivAva);
             if (message.getImageBitmap() != null) {
-                receiveBinding.ivImage.setVisibility(View.VISIBLE);
+                receiveBinding.cvImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(message.getImageBitmap()).into(receiveBinding.ivImage);
             }
         }
@@ -142,7 +142,7 @@ public class MessageAdapter extends RecyclerView.Adapter {
             sendBinding.tvMessageSend.setText(message.getMessage());
             sendBinding.tvTime.setText(message.getCreateAt());
             if (message.getImageBitmap() != null) {
-                sendBinding.ivImage.setVisibility(View.VISIBLE);
+                sendBinding.cvImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(message.getImageBitmap()).into(sendBinding.ivImage);
             }
         }

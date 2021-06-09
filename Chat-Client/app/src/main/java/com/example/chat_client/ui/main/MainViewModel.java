@@ -35,6 +35,10 @@ public class MainViewModel extends ViewModel {
         client.sendMessage(RequestMessage.listFriendRequest());
     }
 
+    public void listActiveFriend() {
+        client.sendMessage(RequestMessage.listActiveFriend());
+    }
+
     /*********
      * GROUP *
      *********/

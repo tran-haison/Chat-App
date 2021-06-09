@@ -10,7 +10,7 @@ import android.view.inputmethod.EditorInfo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.ObjectAdapter;
+import com.example.chat_client.adapters.listview.ObjectAdapter;
 import com.example.chat_client.databinding.ActivitySearchBinding;
 import com.example.chat_client.models.Group;
 import com.example.chat_client.models.Object;
@@ -18,7 +18,7 @@ import com.example.chat_client.models.User;
 import com.example.chat_client.ui.chat.GroupChatActivity;
 import com.example.chat_client.ui.chat.PrivateChatActivity;
 import com.example.chat_client.utils.Constants;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 import com.example.chat_client.utils.ViewUtil;
 import com.google.android.material.snackbar.Snackbar;
 

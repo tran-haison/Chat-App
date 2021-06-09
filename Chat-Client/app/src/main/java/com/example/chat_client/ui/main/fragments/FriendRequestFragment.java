@@ -11,12 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.chat_client.adapters.list_view_adapter.FriendRequestAdapter;
+import com.example.chat_client.adapters.listview.FriendRequestAdapter;
 import com.example.chat_client.databinding.FragmentFriendRequestBinding;
 import com.example.chat_client.models.Object;
 import com.example.chat_client.models.User;
 import com.example.chat_client.ui.main.MainViewModel;
-import com.example.chat_client.utils.MessageUtil;
+import com.example.chat_client.socket.MessageUtil;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;

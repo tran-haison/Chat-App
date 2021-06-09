@@ -12,7 +12,6 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.chat_client.R;
 import com.example.chat_client.databinding.ActivityMainBinding;
 import com.example.chat_client.ui.user.UserInfoActivity;
-import com.example.chat_client.utils.MessageUtil;
 
 public class MainActivity extends AppCompatActivity {
 

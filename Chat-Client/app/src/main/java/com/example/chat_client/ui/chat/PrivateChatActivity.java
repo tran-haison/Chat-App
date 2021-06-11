@@ -28,6 +28,7 @@ import com.example.chat_client.utils.ImageUtil;
 import com.example.chat_client.utils.IntentCall;
 import com.example.chat_client.socket.MessageUtil;
 import com.example.chat_client.utils.PermissionManager;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -36,6 +37,7 @@ import java.util.Objects;
 
 import static com.example.chat_client.models.Message.MessageType.RECEIVE;
 import static com.example.chat_client.models.Message.MessageType.SEND;
+import static com.example.chat_client.socket.Client.MESSAGE_SIZE_BUFFER;
 import static com.example.chat_client.socket.ResponseMessage.FAIL_FRIENDMSG;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FILE_FROM_FRIEND;
 import static com.example.chat_client.socket.ResponseMessage.SUCCESS_FRIENDMSG;
@@ -135,6 +137,13 @@ public class PrivateChatActivity extends AppCompatActivity {
         }
     }
 
+    private void onMessageSent() {
+        String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
+        Message myMessage = new Message(messageFromMe, me, SEND);
+        addNewMessageToView(myMessage);
+        binding.etChatMessage.setText("");
+    }
+
     private void onMessageReceived(String serverMessage) {
         String senderName = MessageUtil.messageToName(serverMessage);
         if (senderName.equals(friend.getName())) {
@@ -144,18 +153,10 @@ public class PrivateChatActivity extends AppCompatActivity {
         }
     }
 
-    private void onMessageSent() {
-        String messageFromMe = Objects.requireNonNull(binding.etChatMessage.getText()).toString();
-        Message myMessage = new Message(messageFromMe, me, SEND);
-        addNewMessageToView(myMessage);
-        binding.etChatMessage.setText("");
-    }
-
     private void onFileSent() {
         try {
-            String filename = FileUtil.getNameFromUri(this, uri);
             Bitmap imageBitmap = ImageUtil.getBitmapFromUri(this, uri);
-            Message myMessage = new Message(filename, me, SEND, imageBitmap);
+            Message myMessage = new Message(me, SEND, imageBitmap);
             addNewMessageToView(myMessage);
         } catch (Exception e) {
             e.printStackTrace();
@@ -167,7 +168,7 @@ public class PrivateChatActivity extends AppCompatActivity {
         if (senderName.equals(friend.getName())) {
             String imageString = MessageUtil.messageToFile(serverMessage);
             Bitmap bitmap = ImageUtil.decodeBase64ToBitmap(imageString);
-            Message friendMessage = new Message("Image", friend, RECEIVE, bitmap);
+            Message friendMessage = new Message(friend, RECEIVE, bitmap);
             addNewMessageToView(friendMessage);
         }
     }
@@ -184,13 +185,10 @@ public class PrivateChatActivity extends AppCompatActivity {
         }
     }
 
-    private void showImageSentDialog(String filename, Bitmap bitmap) {
-        byte[] image_bytes = ImageUtil.getBytesFromBitmap(bitmap);
-        String imageFile = ImageUtil.encodeImageBytesToBase64(image_bytes);
-
+    private void showImageSentDialog(Bitmap bitmap, String imageBase64) {
         DialogUtils.dialogSendImage(
                 this,
-                filename,
+                "Do you want to send this image?",
                 bitmap,
                 new DialogButtonListener() {
                     @Override
@@ -199,7 +197,7 @@ public class PrivateChatActivity extends AppCompatActivity {
 
                     @Override
                     public void onPositiveClicked(Object object) {
-                        viewModel.friendFile(friend, imageFile);
+                        viewModel.friendFile(friend, imageBase64);
                     }
                 });
     }
@@ -231,9 +229,15 @@ public class PrivateChatActivity extends AppCompatActivity {
             if (requestCode == REQUEST_SELECT_IMAGE) {
                 uri = data.getData();
                 try {
-                    String filename = FileUtil.getNameFromUri(this, uri);
                     Bitmap bitmap = ImageUtil.getBitmapFromUri(this, uri);
-                    showImageSentDialog(filename, bitmap);
+                    byte[] imageBytes = ImageUtil.getBytesFromBitmap(bitmap);
+                    long imageLength = imageBytes.length;
+                    if (imageLength >= MESSAGE_SIZE_BUFFER) {
+                        Snackbar.make(binding.getRoot(), "Please select image with size less than 100KB", Snackbar.LENGTH_LONG).show();
+                    } else {
+                        String imageBase64 = ImageUtil.encodeImageBytesToBase64(imageBytes);
+                        showImageSentDialog(bitmap, imageBase64);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

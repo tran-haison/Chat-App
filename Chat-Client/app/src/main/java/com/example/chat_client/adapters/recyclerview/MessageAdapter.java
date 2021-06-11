@@ -120,12 +120,21 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
         void bind(Context context, Message message) {
             receiveBinding.tvUsername.setText(message.getObject().getName());
-            receiveBinding.tvMessageReceive.setText(message.getMessage());
             receiveBinding.tvTime.setText(message.getCreateAt());
             Glide.with(context).load(message.getObject().getAvatar()).into(receiveBinding.ivAva);
+
+            if (message.getMessage() != null) {
+                receiveBinding.cvMessageReceive.setVisibility(View.VISIBLE);
+                receiveBinding.tvMessageReceive.setText(message.getMessage());
+            } else {
+                receiveBinding.cvMessageReceive.setVisibility(View.GONE);
+            }
+
             if (message.getImageBitmap() != null) {
                 receiveBinding.cvImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(message.getImageBitmap()).into(receiveBinding.ivImage);
+            } else {
+                receiveBinding.cvImage.setVisibility(View.GONE);
             }
         }
     }
@@ -141,9 +150,19 @@ public class MessageAdapter extends RecyclerView.Adapter {
         void bind(Context context, Message message) {
             sendBinding.tvMessageSend.setText(message.getMessage());
             sendBinding.tvTime.setText(message.getCreateAt());
+
+            if (message.getMessage() != null) {
+                sendBinding.cvMessageSend.setVisibility(View.VISIBLE);
+                sendBinding.tvMessageSend.setText(message.getMessage());
+            } else {
+                sendBinding.cvMessageSend.setVisibility(View.GONE);
+            }
+
             if (message.getImageBitmap() != null) {
                 sendBinding.cvImage.setVisibility(View.VISIBLE);
                 Glide.with(context).load(message.getImageBitmap()).into(sendBinding.ivImage);
+            } else {
+                sendBinding.cvImage.setVisibility(View.GONE);
             }
         }
     }

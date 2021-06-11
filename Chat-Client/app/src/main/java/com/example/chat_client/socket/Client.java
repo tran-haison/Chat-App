@@ -28,6 +28,7 @@ public class Client {
     public static final String TAG = "ClientSocket";
     public static final String IP_ADDRESS = "192.168.1.14";
     public static final int PORT = 54000;
+    public static final int MESSAGE_SIZE_BUFFER = 102400;
 
     private Client() {
         connectToServer();
@@ -65,7 +66,7 @@ public class Client {
         Log.d(TAG, "Listening for server response...");
 
         int charsRead;
-        char[] buffer = new char[102400];
+        char[] buffer = new char[MESSAGE_SIZE_BUFFER];
 
         // Infinite loop listening for response from server
         while (true) {

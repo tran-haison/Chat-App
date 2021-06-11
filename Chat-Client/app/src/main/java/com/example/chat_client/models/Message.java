@@ -35,8 +35,16 @@ public class Message {
         this.imageBitmap = null;
     }
 
+    public Message(Object object, MessageType messageType, Bitmap imageBitmap) {
+        this.message = null;
+        this.object = object;
+        this.messageType = messageType;
+        this.createAt = CalendarUtil.getCurrentTime();
+        this.imageBitmap = imageBitmap;
+    }
+
     public Message(Object object, MessageType messageType) {
-        this.message = "";
+        this.message = null;
         this.object = object;
         this.messageType = messageType;
         this.createAt = CalendarUtil.getCurrentTime();

@@ -22,10 +22,11 @@ import com.example.chat_client.dialogs.DialogUtils;
 import com.example.chat_client.models.Message;
 import com.example.chat_client.models.Object;
 import com.example.chat_client.models.User;
-import com.example.chat_client.socket.MessageUtil;
 import com.example.chat_client.utils.Constants;
+import com.example.chat_client.utils.FileUtil;
 import com.example.chat_client.utils.ImageUtil;
 import com.example.chat_client.utils.IntentCall;
+import com.example.chat_client.socket.MessageUtil;
 import com.example.chat_client.utils.PermissionManager;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -165,8 +166,8 @@ public class PrivateChatActivity extends AppCompatActivity {
     private void onFileReceived(String serverMessage) {
         String senderName = MessageUtil.messageToName(serverMessage);
         if (senderName.equals(friend.getName())) {
-            String imageBase64 = MessageUtil.messageToFile(serverMessage);
-            Bitmap bitmap = ImageUtil.decodeBase64ToBitmap(imageBase64);
+            String imageString = MessageUtil.messageToFile(serverMessage);
+            Bitmap bitmap = ImageUtil.decodeBase64ToBitmap(imageString);
             Message friendMessage = new Message(friend, RECEIVE, bitmap);
             addNewMessageToView(friendMessage);
         }

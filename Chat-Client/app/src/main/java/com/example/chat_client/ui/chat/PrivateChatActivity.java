@@ -68,7 +68,7 @@ public class PrivateChatActivity extends AppCompatActivity {
         // Setup ViewModel
         setupViewModel();
 
-        // View init
+        // View implementation
         initMessageRecyclerView();
         setViewVisibility();
         Glide.with(this).load(friend.getAvatar()).into(binding.ivAva);
@@ -166,8 +166,8 @@ public class PrivateChatActivity extends AppCompatActivity {
     private void onFileReceived(String serverMessage) {
         String senderName = MessageUtil.messageToName(serverMessage);
         if (senderName.equals(friend.getName())) {
-            String imageString = MessageUtil.messageToFile(serverMessage);
-            Bitmap bitmap = ImageUtil.decodeBase64ToBitmap(imageString);
+            String imageBase64 = MessageUtil.messageToFile(serverMessage);
+            Bitmap bitmap = ImageUtil.decodeBase64ToBitmap(imageBase64);
             Message friendMessage = new Message(friend, RECEIVE, bitmap);
             addNewMessageToView(friendMessage);
         }

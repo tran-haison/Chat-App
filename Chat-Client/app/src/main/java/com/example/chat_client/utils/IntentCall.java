@@ -8,10 +8,8 @@ import android.net.Uri;
 public class IntentCall {
 
     public static final int REQUEST_SELECT_IMAGE = 1;
-    public static final int REQUEST_SELECT_FILE = 2;
 
-    private IntentCall() {
-    }
+    private IntentCall() {}
 
     public static void selectImage(Activity activity) {
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);

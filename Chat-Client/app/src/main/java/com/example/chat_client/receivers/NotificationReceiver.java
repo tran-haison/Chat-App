@@ -37,7 +37,7 @@ public class NotificationReceiver extends BroadcastReceiver {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setAutoCancel(true);
 
-        // Get pending intent based on notification type
+        // Create pending intent based on notification type
         PendingIntent pendingIntent;
         switch (notificationType) {
             case FRIEND_REQUEST:

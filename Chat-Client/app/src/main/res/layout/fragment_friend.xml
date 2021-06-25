@@ -139,7 +139,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/margin_horizontal"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/lavFriend"
